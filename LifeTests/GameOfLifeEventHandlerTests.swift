@@ -9,7 +9,7 @@
 import XCTest
 @testable import Life
 
-class LifeTests: XCTestCase {
+class GameOfLifeEventHandlerTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -29,8 +29,7 @@ class LifeTests: XCTestCase {
         let handler = GameOfLifeEventHandler()
         
         var state = GameOfLife.State(
-            height: 3,
-            width: 3,
+            width: 3, height: 3,
             nodes:
                 [ 0, 0, 0,
                   0, 0, 0,
@@ -51,8 +50,7 @@ class LifeTests: XCTestCase {
         let handler = GameOfLifeEventHandler()
         
         var state = GameOfLife.State(
-            height: 3,
-            width: 3,
+            width: 3, height: 3,
             nodes:
                 [ 0, 1, 0,
                   0, 1, 0,
@@ -73,8 +71,7 @@ class LifeTests: XCTestCase {
         let handler = GameOfLifeEventHandler()
         
         var state = GameOfLife.State(
-            height: 3,
-            width: 3,
+            width: 3, height: 3,
             nodes:
                 [ 1, 1, 1,
                   0, 0, 0,
@@ -95,8 +92,7 @@ class LifeTests: XCTestCase {
         let handler = GameOfLifeEventHandler()
         
         var state = GameOfLife.State(
-            height: 3,
-            width: 3,
+            width: 3, height: 3,
             nodes:
                 [ 0, 0, 0,
                   0, 0, 0,
@@ -117,8 +113,7 @@ class LifeTests: XCTestCase {
         let handler = GameOfLifeEventHandler()
         
         var state = GameOfLife.State(
-            height: 3,
-            width: 3,
+            width: 3, height: 3,
             nodes:
                 [ 1, 0, 0,
                   1, 0, 0,
@@ -139,8 +134,7 @@ class LifeTests: XCTestCase {
         let handler = GameOfLifeEventHandler()
         
         var state = GameOfLife.State(
-            height: 3,
-            width: 3,
+            width: 3, height: 3,
             nodes:
                 [ 0, 0, 1,
                   0, 0, 1,
@@ -161,8 +155,7 @@ class LifeTests: XCTestCase {
         let handler = GameOfLifeEventHandler()
         
         var state = GameOfLife.State(
-            height: 3,
-            width: 3,
+            width: 3, height: 3,
             nodes:
                 [ 1, 0, 1,
                   1, 0, 1,
@@ -183,8 +176,7 @@ class LifeTests: XCTestCase {
         let handler = GameOfLifeEventHandler()
         
         var state = GameOfLife.State(
-            height: 3,
-            width: 3,
+            width: 3, height: 3,
             nodes:
                 [ 1, 1, 1,
                   0, 0, 0,
@@ -205,8 +197,7 @@ class LifeTests: XCTestCase {
         let handler = GameOfLifeEventHandler()
         
         var state = GameOfLife.State(
-            height: 4,
-            width: 4,
+            width: 4, height: 4,
             nodes:
                 [ 0, 0, 0, 0,
                   0, 1, 1, 0,

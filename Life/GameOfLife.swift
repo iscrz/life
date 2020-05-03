@@ -25,9 +25,10 @@ enum GameOfLife {
         var generation: Int = 0
         var nodes: [Bool]
         
-        init(height: Int, width: Int, nodes: [Int]) {
+        init(width: Int, height: Int, nodes: [Int]? = nil) {
             self.gridSize = (width: width, height: height)
-            self.nodes = nodes.map { $0 >= 1 ? true : false }
+            self.nodes = nodes?.map { $0 >= 1 ? true : false }
+                         ?? [Bool].init(repeating: false, count: width * height)
         }
         
         struct Cell {
@@ -92,8 +93,6 @@ class GameOfLifeEventHandler: EventHandler<GameOfLife.Event, GameOfLife.State, G
                 default:
                     state.nodes[offset] = false
                 }
-                
-                print(state.nodes)
             }
         case .randomize:
             state.nodes = (0..<(state.gridSize.width * state.gridSize.height)).map { _ in Bool.random() }

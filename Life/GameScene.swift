@@ -15,22 +15,7 @@ class GameScene: SKScene {
     
     var subscriptions: Set<AnyCancellable> = []
     
-    let coordinator: EventCoordinator<GameOfLife.Event, GameOfLife.State, GameOfLife.Action> = {
-        let state = GameOfLife.State(height: 10, width: 10, nodes:
-        [
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            0, 0, 0, 1, 1, 1, 0, 0, 0, 1,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
-            0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
-            0, 0, 0, 1, 0, 1, 1, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        ])
-        return EventCoordinator(GameOfLifeEventHandler(), state: state)
-    }()
+    private(set) var coordinator: EventCoordinator<GameOfLife.Event, GameOfLife.State, GameOfLife.Action>!
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
@@ -44,14 +29,23 @@ class GameScene: SKScene {
     
     override func sceneDidLoad() {
         
-        let size = coordinator.currentState.gridSize
+        let nodeSize: Int = 20
         
-        let square = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 30, height: 30))
-        square.fillColor = .blue
-        for y in 0..<size.height {
-            for x in 0..<size.width {
+        let width = Int(ceil(size.width / CGFloat(nodeSize)))
+        let height = Int(ceil(size.height / CGFloat(nodeSize)))
+        
+        let state = GameOfLife.State(width: width, height: height)
+        coordinator = EventCoordinator(GameOfLifeEventHandler(), state: state)
+        
+        
+        let square = SKShapeNode(circleOfRadius: CGFloat(nodeSize) / 2.0)
+        square.fillColor = .white
+        square.strokeColor = .clear
+        for y in 0..<height {
+            for x in 0..<width {
                 let square = square.copy() as! SKShapeNode
-                square.position = CGPoint(x: -200 + (x * 40), y: y * -40)
+                square.position = CGPoint(x: x * nodeSize, y: y * -nodeSize)
+                //square.position = CGPoint(x: 0, y: 0)
                 addChild(square)
                 squares.append(square)
             }
@@ -65,10 +59,17 @@ class GameScene: SKScene {
             .store(in: &subscriptions)
         
         coordinator.state
+            //.
             .enumerate(\.nodes)
             .sink { [weak self] offset, element in
-                //self?.squares[offset].fillColor = element ? .yellow : .blue
-                self?.squares[offset].run(SKAction.fadeAlpha(to: element ? 1.0 : 0, duration: 0.25))
+                DispatchQueue.main.async {
+                    //self?.squares[offset].fillColor = element ? .yellow : .blue
+                    if element == true {
+                        self?.squares[offset].run(SKAction.scale(to: 1.0, duration: 0.2))
+                    } else {
+                        self?.squares[offset].run(SKAction.scale(to: 0.05, duration: 0.2))
+                    }
+                }
             }
             .store(in: &subscriptions)
         
@@ -108,6 +109,10 @@ class GameScene: SKScene {
             spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
                                               SKAction.fadeOut(withDuration: 0.5),
                                               SKAction.removeFromParent()]))
+        }
+        
+        Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { _ in
+            self.coordinator.events.send(.evolve)
         }
     }
     
