@@ -47,11 +47,10 @@ enum GameOfLife {
     }
 }
 
-
-class GameOfLifeEventHandler: EventHandler<GameOfLife.Event, GameOfLife.State, GameOfLife.Action> {
+struct GameOfLifeEventHandler: EventHandler {
     
     @discardableResult
-    override func handle(event: Event, state: inout State) -> [Action] {
+    func handle(event: GameOfLife.Event, state: inout GameOfLife.State) -> [GameOfLife.Action] {
         
         switch event {
         case .evolve:

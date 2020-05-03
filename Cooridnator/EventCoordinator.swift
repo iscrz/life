@@ -6,16 +6,16 @@ public protocol Event {}
 public protocol Action {}
 
 /// State machine to handle a unidirectional data flow of event and actions.
-public final class EventCoordinator<E: Event, S: State, A: Action> {
+public final class EventCoordinator<Handler: EventHandler> {
 
     /// Convenience alias for CoordinatorSystem.Event
-    public typealias Event = E
+    public typealias Event = Handler.E
 
     /// Convenience alias for CoordinatorSystem.State
-    public typealias State = S
+    public typealias State = Handler.S
 
     /// Convenience alias for CoordinatorSystem.Action
-    public typealias Action = A
+    public typealias Action = Handler.A
     
     public typealias Update = (State, [Action], PassthroughSubject<Event, Never>)
 
@@ -23,22 +23,24 @@ public final class EventCoordinator<E: Event, S: State, A: Action> {
     
     public let events = PassthroughSubject<Event, Never>()
     
-    private let statePublisher: CurrentValueSubject<State, Never>
+    public let statePublisher: CurrentValueSubject<State, Never>
     private let actionPublisher = PassthroughSubject<Update, Never>()
 
     private var subscriptions = [AnyCancellable]()
     private let workQueue = DispatchQueue(label: "com.isaac.eventCoordinator")
     
     
-    private var eventHandler: EventHandler<Event, State, Action>
+    private var eventHandler: Handler
     
     public var currentState: State {
         statePublisher.value
     }
 
     public var state: AnyPublisher<State, Never> {
-        statePublisher
+        Publishers.SubscribeOn(upstream: statePublisher, scheduler: workQueue, options: nil)
             .eraseToAnyPublisher()
+        //statePublisher
+            //.eraseToAnyPublisher()
     }
     
     public var updates: AnyPublisher<Update, Never> {
@@ -49,7 +51,7 @@ public final class EventCoordinator<E: Event, S: State, A: Action> {
     /// Creates an `EventCoordinator` with the following parameters.
     /// - Parameter eventHandler: `EventHandler` implementation to coordinate events and actions on
     ///   - state: Initial state for the coordinator
-    public init(_ eventHandler: EventHandler<Event, State, Action>, state: State) {
+    public init(_ eventHandler: Handler, state: State) {
         self.eventHandler = eventHandler
         self.statePublisher = CurrentValueSubject<State, Never>(state)
         
@@ -67,11 +69,11 @@ public final class EventCoordinator<E: Event, S: State, A: Action> {
 
 extension Publisher where Output: Event, Failure == Never {
     
-    func handle<E: Event, S: State, A: Action>(
-        _ handler: EventHandler<E, S, A>,
-        state: CurrentValueSubject<S, Never>) -> AnyPublisher<(S, [A]), Never>
+    func handle<Handler: EventHandler>(
+        _ handler: Handler,
+        state: CurrentValueSubject<Handler.S, Never>) -> AnyPublisher<(Handler.S, [Handler.A]), Never>
     {
-        self.compactMap { $0 as? E }
+        self.compactMap { $0 as? Handler.E }
             .map { event in
                 var state = state.value
                 let actions = handler.handle(event: event, state: &state)

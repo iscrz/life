@@ -15,7 +15,7 @@ class GameScene: SKScene {
     
     var subscriptions: Set<AnyCancellable> = []
     
-    private(set) var coordinator: EventCoordinator<GameOfLife.Event, GameOfLife.State, GameOfLife.Action>!
+    private(set) var coordinator: EventCoordinator<GameOfLifeEventHandler>!
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
@@ -29,7 +29,7 @@ class GameScene: SKScene {
     
     override func sceneDidLoad() {
         
-        let nodeSize: Int = 20
+        let nodeSize: Int = 10
         
         let width = Int(ceil(size.width / CGFloat(nodeSize)))
         let height = Int(ceil(size.height / CGFloat(nodeSize)))
@@ -37,10 +37,9 @@ class GameScene: SKScene {
         let state = GameOfLife.State(width: width, height: height)
         coordinator = EventCoordinator(GameOfLifeEventHandler(), state: state)
         
-        
         let square = SKShapeNode(circleOfRadius: CGFloat(nodeSize) / 2.0)
         square.fillColor = .white
-        square.strokeColor = .clear
+        square.lineWidth = 0
         for y in 0..<height {
             for x in 0..<width {
                 let square = square.copy() as! SKShapeNode
@@ -54,21 +53,18 @@ class GameScene: SKScene {
         coordinator.state
             .new(\.generation)
             .map { "Generation \($0)" }
-            .print()
+            .receive(on: RunLoop.main)
             .assign(to: \.title, on: self)
             .store(in: &subscriptions)
         
         coordinator.state
-            //.
             .enumerate(\.nodes)
+            .receive(on: RunLoop.main)
             .sink { [weak self] offset, element in
-                DispatchQueue.main.async {
-                    //self?.squares[offset].fillColor = element ? .yellow : .blue
-                    if element == true {
-                        self?.squares[offset].run(SKAction.scale(to: 1.0, duration: 0.2))
-                    } else {
-                        self?.squares[offset].run(SKAction.scale(to: 0.05, duration: 0.2))
-                    }
+                if element == true {
+                    self?.squares[offset].run(SKAction.scale(to: 1.0, duration: 0.2))
+                } else {
+                    self?.squares[offset].run(SKAction.scale(to: 0.05, duration: 0.2))
                 }
             }
             .store(in: &subscriptions)

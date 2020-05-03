@@ -63,8 +63,8 @@ enum MockSystem {
     }
 }
 
-class MockEventHandler: EventHandler<MockSystem.Event, MockSystem.State, MockSystem.Action> {
-    override func handle(event: MockSystem.Event, state: inout MockSystem.State) -> [MockSystem.Action] {
+struct MockEventHandler: EventHandler {
+    func handle(event: MockSystem.Event, state: inout MockSystem.State) -> [MockSystem.Action] {
         
         switch event {
         case .one:

@@ -94,6 +94,7 @@
 		9661D7B6245E60D900550521 /* EventCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCoordinator.swift; sourceTree = "<group>"; };
 		96D68BFE245E958400E77B13 /* GameOfLife.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLife.swift; sourceTree = "<group>"; };
 		96D68C00245EA8CD00E77B13 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		96D68C02245F712B00E77B13 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +134,7 @@
 		9661D75C245E5CED00550521 = {
 			isa = PBXGroup;
 			children = (
+				96D68C02245F712B00E77B13 /* README.md */,
 				9661D767245E5CED00550521 /* Life */,
 				9661D782245E5CF000550521 /* LifeTests */,
 				9661D794245E5E4A00550521 /* Cooridnator */,
