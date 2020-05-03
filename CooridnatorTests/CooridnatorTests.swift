@@ -34,15 +34,15 @@ class CooridnatorTests: XCTestCase {
             }
             .store(in: &subscriptions)
         
-        coordinator.event
+        coordinator.events
             .sink {
                 print("LOG: did send event: \($0)")
             }
             .store(in: &subscriptions)
         
-        coordinator.event.send(.one)
-        coordinator.event.send(.one)
-        coordinator.event.send(.one)
+        coordinator.events.send(.one)
+        coordinator.events.send(.one)
+        coordinator.events.send(.one)
         
         
         waitForExpectations(timeout: 1.0, handler: nil)

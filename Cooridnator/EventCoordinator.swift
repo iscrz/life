@@ -22,13 +22,15 @@ public final class EventCoordinator<E: Event, S: State, A: Action> {
 
     /// Current state of the EventCoordinator.
     
-    public let event = PassthroughSubject<Event, Never>()
+    public let events = PassthroughSubject<Event, Never>()
     
-    private let statePublisher: CurrentValueSubject<State, Never>
-    private let actionPublisher = PassthroughSubject<Update, Never>()
+    fileprivate let statePublisher: CurrentValueSubject<State, Never>
+    fileprivate let actionPublisher = PassthroughSubject<Update, Never>()
 
     private var subscriptions = [AnyCancellable]()
     private let workQueue = DispatchQueue(label: "com.isaac.eventCoordinator")
+    
+    
     private var eventHandler: EventHandler<Event, State, Action>
     
 
@@ -49,18 +51,30 @@ public final class EventCoordinator<E: Event, S: State, A: Action> {
         self.eventHandler = eventHandler
         self.statePublisher = CurrentValueSubject<State, Never>(state)
         
-        event
+        events
             .receive(on: workQueue)
-            .sink { [weak self] event in
+            .handle(self.eventHandler, state: self.statePublisher)
+            .sink { [weak self] state, action in
                 guard let self = self else { return }
-                
-                var state = self.statePublisher.value
-                let actions = self.eventHandler.handle(event: event, state: &state)
                 self.statePublisher.send(state)
-
-                let update = Update(state: state, actions: actions, notify: self.event)
-                self.actionPublisher.send(update)
+                self.actionPublisher.send((state, action, self.events))
             }
             .store(in: &subscriptions)
+    }
+}
+
+extension Publisher where Output: Event, Failure == Never {
+    
+    func handle<E: Event, S: State, A: Action>(
+        _ handler: EventHandler<E, S, A>,
+        state: CurrentValueSubject<S, Never>) -> AnyPublisher<(S, [A]), Never>
+    {
+        self.compactMap { $0 as? E }
+            .map { event in
+                var state = state.value
+                let actions = handler.handle(event: event, state: &state)
+                return (state, actions)
+            }
+            .eraseToAnyPublisher()
     }
 }
