@@ -25,7 +25,7 @@ class CooridnatorTests: XCTestCase {
     func testCounting() {
         let expect = expectation(description: "Expecting it to work.")
         let coordinator = EventCoordinator(MockEventHandler(), state: .init())
-        coordinator.state2
+        coordinator.state
             .print()
             .sink { state in
                 if state.count == 3 {
@@ -34,30 +34,36 @@ class CooridnatorTests: XCTestCase {
             }
             .store(in: &subscriptions)
         
-        coordinator.notify(event: .one)
-        coordinator.notify(event: .one)
-        coordinator.notify(event: .one)
+        coordinator.event
+            .sink {
+                print("LOG: did send event: \($0)")
+            }
+            .store(in: &subscriptions)
+        
+        coordinator.event.send(.one)
+        coordinator.event.send(.one)
+        coordinator.event.send(.one)
         
         
         waitForExpectations(timeout: 1.0, handler: nil)
     }
 }
 
-enum MockSystem: CoordinatorSystem {
-    enum Event {
+enum MockSystem {
+    enum Event: Cooridnator.Event {
         case one
     }
     
-    struct State {
+    struct State: Cooridnator.State {
         var count: Int = 0
     }
     
-    enum Action {
+    enum Action: Cooridnator.Action {
         case two
     }
 }
 
-class MockEventHandler: EventHandler<MockSystem> {
+class MockEventHandler: EventHandler<MockSystem.Event, MockSystem.State, MockSystem.Action> {
     override func handle(event: MockSystem.Event, state: inout MockSystem.State) -> [MockSystem.Action] {
         
         switch event {

@@ -1,16 +1,16 @@
 import Foundation
 
 /// State machine for the EventCoordinator flow.
-open class EventHandler<System: CoordinatorSystem> {
+open class EventHandler<E: Event, S: State, A: Action> {
 
     /// Convenience alias for CoordinatorSystem.Event
-    public typealias Event = System.Event
+    public typealias Event = E
 
     /// Convenience alias for CoordinatorSystem.Action
-    public typealias State = System.State
+    public typealias State = S
 
     /// Convenience alias for CoordinatorSystem.Action
-    public typealias Action = System.Action
+    public typealias Action = A
 
     /// Creates an EventHandler with no parameters.
     public init() { }

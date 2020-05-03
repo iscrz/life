@@ -21,10 +21,8 @@
 		9661D7A5245E5E4A00550521 /* Cooridnator.h in Headers */ = {isa = PBXBuildFile; fileRef = 9661D795245E5E4A00550521 /* Cooridnator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9661D7A8245E5E4A00550521 /* Cooridnator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9661D793245E5E4A00550521 /* Cooridnator.framework */; };
 		9661D7A9245E5E4A00550521 /* Cooridnator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9661D793245E5E4A00550521 /* Cooridnator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9661D7B8245E60D900550521 /* CoordinatorSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D7B3245E60D800550521 /* CoordinatorSystem.swift */; };
 		9661D7B9245E60D900550521 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D7B4245E60D800550521 /* EventHandler.swift */; };
 		9661D7BB245E60D900550521 /* EventCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D7B6245E60D900550521 /* EventCoordinator.swift */; };
-		9661D7BC245E60D900550521 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D7B7245E60D900550521 /* Update.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,10 +90,8 @@
 		9661D79B245E5E4A00550521 /* CooridnatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CooridnatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9661D7A2245E5E4A00550521 /* CooridnatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooridnatorTests.swift; sourceTree = "<group>"; };
 		9661D7A4245E5E4A00550521 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9661D7B3245E60D800550521 /* CoordinatorSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorSystem.swift; sourceTree = "<group>"; };
 		9661D7B4245E60D800550521 /* EventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		9661D7B6245E60D900550521 /* EventCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCoordinator.swift; sourceTree = "<group>"; };
-		9661D7B7245E60D900550521 /* Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,10 +180,8 @@
 			children = (
 				9661D795245E5E4A00550521 /* Cooridnator.h */,
 				9661D796245E5E4A00550521 /* Info.plist */,
-				9661D7B3245E60D800550521 /* CoordinatorSystem.swift */,
 				9661D7B6245E60D900550521 /* EventCoordinator.swift */,
 				9661D7B4245E60D800550521 /* EventHandler.swift */,
-				9661D7B7245E60D900550521 /* Update.swift */,
 			);
 			path = Cooridnator;
 			sourceTree = "<group>";
@@ -396,10 +390,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9661D7BC245E60D900550521 /* Update.swift in Sources */,
 				9661D7BB245E60D900550521 /* EventCoordinator.swift in Sources */,
 				9661D7B9245E60D900550521 /* EventHandler.swift in Sources */,
-				9661D7B8245E60D900550521 /* CoordinatorSystem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
