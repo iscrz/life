@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9661D77E245E5CF000550521"
-               BuildableName = "LifeTests.xctest"
-               BlueprintName = "LifeTests"
+               BlueprintIdentifier = "9661D79A245E5E4A00550521"
+               BuildableName = "CooridnatorTests.xctest"
+               BlueprintName = "CooridnatorTests"
                ReferencedContainer = "container:Life.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,9 +42,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9661D79A245E5E4A00550521"
-               BuildableName = "CooridnatorTests.xctest"
-               BlueprintName = "CooridnatorTests"
+               BlueprintIdentifier = "9661D77E245E5CF000550521"
+               BuildableName = "LifeTests.xctest"
+               BlueprintName = "LifeTests"
                ReferencedContainer = "container:Life.xcodeproj">
             </BuildableReference>
          </TestableReference>

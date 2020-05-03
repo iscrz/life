@@ -15,7 +15,22 @@ class GameScene: SKScene {
     
     var subscriptions: Set<AnyCancellable> = []
     
-    let coordinator = EventCoordinator(GameOfLifeEventHandler(), state: .init())
+    let coordinator: EventCoordinator<GameOfLife.Event, GameOfLife.State, GameOfLife.Action> = {
+        let state = GameOfLife.State(height: 10, width: 10, nodes:
+        [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            0, 0, 0, 1, 1, 1, 0, 0, 0, 1,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+            0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+            0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+            0, 0, 0, 1, 0, 1, 1, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        ])
+        return EventCoordinator(GameOfLifeEventHandler(), state: state)
+    }()
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
@@ -52,9 +67,13 @@ class GameScene: SKScene {
         coordinator.state
             .enumerate(\.nodes)
             .sink { [weak self] offset, element in
-                self?.squares[offset].fillColor = element ? .yellow : .blue
+                //self?.squares[offset].fillColor = element ? .yellow : .blue
+                self?.squares[offset].run(SKAction.fadeAlpha(to: element ? 1.0 : 0, duration: 0.25))
             }
             .store(in: &subscriptions)
+        
+        
+        coordinator.events.send(.randomize)
         
         /* OLD WAY
         coordinator.state
@@ -75,6 +94,7 @@ class GameScene: SKScene {
         if let label = self.label {
             label.alpha = 0.0
             label.run(SKAction.fadeIn(withDuration: 2.0))
+            
         }
         
         // Create shape node to use during mouse interaction
@@ -93,7 +113,7 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        coordinator.events.send(.randomize)
+        coordinator.events.send(.evolve)
 //        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
 //            n.position = pos
 //            n.strokeColor = SKColor.green
