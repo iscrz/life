@@ -23,6 +23,8 @@
 		9661D7A9245E5E4A00550521 /* Cooridnator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9661D793245E5E4A00550521 /* Cooridnator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9661D7B9245E60D900550521 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D7B4245E60D800550521 /* EventHandler.swift */; };
 		9661D7BB245E60D900550521 /* EventCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D7B6245E60D900550521 /* EventCoordinator.swift */; };
+		96D68BFF245E958400E77B13 /* GameOfLife.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68BFE245E958400E77B13 /* GameOfLife.swift */; };
+		96D68C01245EA8CD00E77B13 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68C00245EA8CD00E77B13 /* State.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		9661D7A4245E5E4A00550521 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9661D7B4245E60D800550521 /* EventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		9661D7B6245E60D900550521 /* EventCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCoordinator.swift; sourceTree = "<group>"; };
+		96D68BFE245E958400E77B13 /* GameOfLife.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLife.swift; sourceTree = "<group>"; };
+		96D68C00245EA8CD00E77B13 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +166,7 @@
 				9661D775245E5CEF00550521 /* Assets.xcassets */,
 				9661D777245E5CEF00550521 /* LaunchScreen.storyboard */,
 				9661D77A245E5CEF00550521 /* Info.plist */,
+				96D68BFE245E958400E77B13 /* GameOfLife.swift */,
 			);
 			path = Life;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 				9661D796245E5E4A00550521 /* Info.plist */,
 				9661D7B6245E60D900550521 /* EventCoordinator.swift */,
 				9661D7B4245E60D800550521 /* EventHandler.swift */,
+				96D68C00245EA8CD00E77B13 /* State.swift */,
 			);
 			path = Cooridnator;
 			sourceTree = "<group>";
@@ -374,6 +380,7 @@
 			files = (
 				9661D76F245E5CED00550521 /* GameScene.swift in Sources */,
 				9661D771245E5CED00550521 /* GameViewController.swift in Sources */,
+				96D68BFF245E958400E77B13 /* GameOfLife.swift in Sources */,
 				9661D769245E5CED00550521 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +399,7 @@
 			files = (
 				9661D7BB245E60D900550521 /* EventCoordinator.swift in Sources */,
 				9661D7B9245E60D900550521 /* EventHandler.swift in Sources */,
+				96D68C01245EA8CD00E77B13 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

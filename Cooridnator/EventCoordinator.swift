@@ -2,7 +2,6 @@ import Foundation
 import Combine
 
 
-public protocol State {}
 public protocol Event {}
 public protocol Action {}
 
@@ -24,8 +23,8 @@ public final class EventCoordinator<E: Event, S: State, A: Action> {
     
     public let events = PassthroughSubject<Event, Never>()
     
-    fileprivate let statePublisher: CurrentValueSubject<State, Never>
-    fileprivate let actionPublisher = PassthroughSubject<Update, Never>()
+    private let statePublisher: CurrentValueSubject<State, Never>
+    private let actionPublisher = PassthroughSubject<Update, Never>()
 
     private var subscriptions = [AnyCancellable]()
     private let workQueue = DispatchQueue(label: "com.isaac.eventCoordinator")

@@ -8,8 +8,14 @@
 
 import SpriteKit
 import GameplayKit
+import Cooridnator
+import Combine
 
 class GameScene: SKScene {
+    
+    var subscriptions: Set<AnyCancellable> = []
+    
+    let coordinator = EventCoordinator(GameOfLifeEventHandler(), state: .init())
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
@@ -17,9 +23,47 @@ class GameScene: SKScene {
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
+    private var squares: [SKShapeNode] = []
+    
+    private var title: String = "aa"
     
     override func sceneDidLoad() {
-
+        
+        let square = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 30, height: 30))
+        square.fillColor = .blue
+        for i in 0...10 {
+            let square = square.copy() as! SKShapeNode
+            square.position = CGPoint(x: -200 + (i * 40), y: 50)
+            addChild(square)
+            squares.append(square)
+        }
+        
+        coordinator.state
+            .new(\.generation)
+            .map { "Generation \($0)" }
+            .print()
+            .assign(to: \.title, on: self)
+            .store(in: &subscriptions)
+        
+        coordinator.state
+            .enumerate(\.nodes)
+            .sink { [weak self] offset, element in
+                self?.squares[offset].fillColor = element ? .blue : .yellow
+            }
+            .store(in: &subscriptions)
+        
+        /* OLD WAY
+        coordinator.state
+            .map(\.nodes)
+            .removeDuplicates()
+            .flatMap { $0.enumerated().publisher }
+            .sink {
+                self.squares[$0.offset].fillColor = $0.element ? .blue : .yellow
+            }
+            .store(in: &subscriptions)
+        */
+        
+        
         self.lastUpdateTime = 0
         
         // Get label node from scene and store it for use later
@@ -45,6 +89,7 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
+        coordinator.events.send(.randomize)
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
             n.strokeColor = SKColor.green
