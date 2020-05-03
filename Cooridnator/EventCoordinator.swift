@@ -32,6 +32,9 @@ public final class EventCoordinator<E: Event, S: State, A: Action> {
     
     private var eventHandler: EventHandler<Event, State, Action>
     
+    public var currentState: State {
+        statePublisher.value
+    }
 
     public var state: AnyPublisher<State, Never> {
         statePublisher

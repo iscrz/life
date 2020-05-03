@@ -29,13 +29,17 @@ class GameScene: SKScene {
     
     override func sceneDidLoad() {
         
+        let size = coordinator.currentState.gridSize
+        
         let square = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 30, height: 30))
         square.fillColor = .blue
-        for i in 0...10 {
-            let square = square.copy() as! SKShapeNode
-            square.position = CGPoint(x: -200 + (i * 40), y: 50)
-            addChild(square)
-            squares.append(square)
+        for y in 0..<size.height {
+            for x in 0..<size.width {
+                let square = square.copy() as! SKShapeNode
+                square.position = CGPoint(x: -200 + (x * 40), y: y * -40)
+                addChild(square)
+                squares.append(square)
+            }
         }
         
         coordinator.state
@@ -48,7 +52,7 @@ class GameScene: SKScene {
         coordinator.state
             .enumerate(\.nodes)
             .sink { [weak self] offset, element in
-                self?.squares[offset].fillColor = element ? .blue : .yellow
+                self?.squares[offset].fillColor = element ? .yellow : .blue
             }
             .store(in: &subscriptions)
         
@@ -90,27 +94,27 @@ class GameScene: SKScene {
     
     func touchDown(atPoint pos : CGPoint) {
         coordinator.events.send(.randomize)
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
+//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
+//            n.position = pos
+//            n.strokeColor = SKColor.green
+//            self.addChild(n)
+//        }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
+//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
+//            n.position = pos
+//            n.strokeColor = SKColor.blue
+//            self.addChild(n)
+//        }
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
+//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
+//            n.position = pos
+//            n.strokeColor = SKColor.red
+//            self.addChild(n)
+//        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

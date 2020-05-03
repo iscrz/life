@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 import Cooridnator
 
 enum GameOfLife {
@@ -15,8 +16,9 @@ enum GameOfLife {
     }
     
     struct State: Cooridnator.State {
+        let gridSize = (width: 10, height: 10)
         var generation: Int = 0
-        var nodes: [Bool] = []
+        var nodes: [Bool] = [true, false, true, true, true]
     }
     
     enum Action: Cooridnator.Action {
@@ -30,7 +32,7 @@ class GameOfLifeEventHandler: EventHandler<GameOfLife.Event, GameOfLife.State, G
         
         switch event {
         case .randomize:
-            state.nodes = (0...10).map { _ in Bool.random() }
+            state.nodes = (0..<(state.gridSize.width * state.gridSize.height)).map { _ in Bool.random() }
         }
         
         return []
