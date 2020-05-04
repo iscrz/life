@@ -59,6 +59,7 @@ struct GameOfLifeEventHandler: EventHandler {
         switch event {
         case .tappedStartButton:
             actions.append(.start)
+            
         case .evolve:
             let oldState = state
             state.nodes.enumerated().forEach { offset, element in
@@ -66,14 +67,16 @@ struct GameOfLifeEventHandler: EventHandler {
                 let alive = oldState.aliveNeighbors(offset)
                 
                 switch element {
-                case true where alive == 2 || alive == 3:
-                    break
-                case false where alive == 3:
-                    state.nodes[offset] = true
-                default:
-                    state.nodes[offset] = false
+                case true where alive == 2 || alive == 3: break
+                case false where alive == 3: state.nodes[offset] = true
+                default: state.nodes[offset] = false
                 }
             }
+            
+            if state.nodes != oldState.nodes {
+                state.generation += 1
+            }
+            
         case .randomize:
             state.nodes = (0..<(state.gridSize.width * state.gridSize.height)).map { _ in Bool.random() }
             
@@ -106,23 +109,22 @@ extension GameOfLife.State {
     
     func neighbors(for index: Int) -> [Int] {
         var neighbors = [
-            index + gridSize.width,
-            index - gridSize.width]
+            index + gridSize.width, //bottom
+            index - gridSize.width] // top
         
         if (gridSize.width - index) % gridSize.width != 0 {
             neighbors += [
-                index - 1,
-                index - 1 - gridSize.width,
-                index - 1 + gridSize.width,
+                index - 1, // left
+                index - 1 - gridSize.width, // top left
+                index - 1 + gridSize.width, // bottom left
             ]
         }
         
-        
         if (index + 1) % gridSize.width != 0 {
             neighbors += [
-                index + 1,
-                index + 1 - gridSize.width,
-                index + 1 + gridSize.width,
+                index + 1, // right
+                index + 1 - gridSize.width, // top right
+                index + 1 + gridSize.width, // bottom right
             ]
         }
         
@@ -134,14 +136,5 @@ extension GameOfLife.State {
             .compactMap { nodes[safe: $0] }
             .filter { $0 == true }
             .count
-    }
-}
-
-private struct Pattern {
-    let size: CGFloat
-    let pattern: [Int]
-    
-    var center: Int {
-        Int(floor(size * size / 2.0))
     }
 }

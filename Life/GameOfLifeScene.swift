@@ -34,8 +34,6 @@ class GameOfLifeScene: SKScene {
     }
     
     override func sceneDidLoad() {
-        
-        
         setupView()
         setupCoordinator()
     }
