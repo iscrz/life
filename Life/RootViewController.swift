@@ -12,7 +12,7 @@ import GameplayKit
 import Combine
 import Cooridnator
 
-class GameViewController: UIViewController {
+class RootViewController: UIViewController {
     
     var lifeActionHandler: ActionHandler!
     var coordinator: EventCoordinator<GameOfLifeEventHandler>!
@@ -30,7 +30,7 @@ class GameViewController: UIViewController {
         coordinator = EventCoordinator(GameOfLifeEventHandler(), state: state)
         lifeActionHandler = ActionHandler(coordinator!.updates)
         
-        let sceneNode = GameScene(size: size, nodeSize: nodeSize, coordinator: coordinator)
+        let sceneNode = GameOfLifeScene(size: size, nodeSize: nodeSize, coordinator: coordinator)
         sceneNode.scaleMode = .aspectFill
             
         // Present the scene

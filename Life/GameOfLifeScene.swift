@@ -11,20 +11,14 @@ import GameplayKit
 import Cooridnator
 import Combine
 
-class GameScene: SKScene {
+class GameOfLifeScene: SKScene {
     
     var subscriptions: Set<AnyCancellable> = []
     
     let coordinator: EventCoordinator<GameOfLifeEventHandler>
     let nodeSize: Int
     
-    var entities = [GKEntity]()
-    var graphs = [String : GKGraph]()
-    
-    private var lastUpdateTime : TimeInterval = 0
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
-    private var squares: [SKShapeNode] = []
+    private var squares: [Cell] = []
     
     private var title: String = "aa"
     
@@ -44,12 +38,11 @@ class GameScene: SKScene {
         let width = coordinator.currentState.gridSize.width
         let height = coordinator.currentState.gridSize.height
         
-        let square = SKShapeNode(circleOfRadius: CGFloat(nodeSize) / 2.0)
-        square.fillColor = .white
-        square.lineWidth = 0
+        
+        let square = Cell(diameter: nodeSize)
         for y in 0..<height {
             for x in 0..<width {
-                let square = square.copy() as! SKShapeNode
+                let square = square.copy() as! Cell
                 square.position = CGPoint(x: x * nodeSize, y: y * -nodeSize)
                 addChild(square)
                 squares.append(square)
@@ -67,50 +60,17 @@ class GameScene: SKScene {
             .enumerate(\.nodes)
             .receive(on: RunLoop.main)
             .sink { [weak self] offset, element in
-                if element == true {
-                    self?.squares[offset].run(SKAction.scale(to: 1.0, duration: 0.2))
-                } else {
-                    self?.squares[offset].run(SKAction.scale(to: 0.05, duration: 0.2))
-                }
+                self?.squares[offset].alive = element
             }
             .store(in: &subscriptions)
         
         coordinator.events.send(.randomize)
-    
-        self.lastUpdateTime = 0
-        
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
-            
-        }
-        
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
-        
-        
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
+        coordinator.events.send(.randomize)
         coordinator.notify(.tappedStartButton)
-//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-//            n.position = pos
-//            n.strokeColor = SKColor.green
-//            self.addChild(n)
-//        }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -130,10 +90,6 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
@@ -148,24 +104,32 @@ class GameScene: SKScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
-    
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-        
-        // Initialize _lastUpdateTime if it has not already been
-        if (self.lastUpdateTime == 0) {
-            self.lastUpdateTime = currentTime
-        }
-        
-        // Calculate time since last update
-        let dt = currentTime - self.lastUpdateTime
-        
-        // Update entities
-        for entity in self.entities {
-            entity.update(deltaTime: dt)
-        }
-        
-        self.lastUpdateTime = currentTime
-    }
 }
+
+class Cell: SKShapeNode {
+    override init() { super.init() }
+    
+    init(diameter: Int) {
+        super.init()
+        
+        
+        self.path = CGPath(
+            ellipseIn: CGRect(origin: .zero, size: CGSize(width: diameter, height: diameter)), transform: nil)
+        self.fillColor = .white
+        self.lineWidth = 0
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var alive: Bool = true {
+        willSet {
+            if newValue != alive {
+                run(SKAction.fadeAlpha(to: newValue ? 1.0: 0.0, duration: 1.0), withKey: "Fade")
+            }
+        }
+    }
+
+}
+

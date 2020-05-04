@@ -44,9 +44,6 @@ public final class EventCoordinator<Handler: EventHandler> {
             .eraseToAnyPublisher()
     }()
 
-    
-    
-    
     public lazy var updates: UpdatePublisher = {
         actionPublisher
             .receive(on: workQueue)

@@ -30,7 +30,7 @@ class ActionHandler {
     
     private func startTimer(notify: EventCoordinator<GameOfLifeEventHandler>.EventPublisher) {
         stopTimer()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true, block: { _ in
             notify.send(.evolve)
         })
     }
