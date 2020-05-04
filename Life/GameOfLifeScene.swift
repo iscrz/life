@@ -18,7 +18,7 @@ class GameOfLifeScene: SKScene {
     let coordinator: EventCoordinator<GameOfLifeEventHandler>
     let nodeSize: Int
     
-    private var squares: [Cell] = []
+    private var cells: [Cell] = []
     
     private var title: String = "aa"
     
@@ -35,9 +35,15 @@ class GameOfLifeScene: SKScene {
     
     override func sceneDidLoad() {
         
+        
+        setupView()
+        setupCoordinator()
+    }
+    
+    func setupView() {
+        
         let width = coordinator.currentState.gridSize.width
         let height = coordinator.currentState.gridSize.height
-        
         
         let square = Cell(diameter: nodeSize)
         for y in 0..<height {
@@ -45,9 +51,12 @@ class GameOfLifeScene: SKScene {
                 let square = square.copy() as! Cell
                 square.position = CGPoint(x: x * nodeSize, y: y * -nodeSize)
                 addChild(square)
-                squares.append(square)
+                cells.append(square)
             }
         }
+    }
+    
+    func setupCoordinator() {
         
         coordinator.state
             .new(\.generation)
@@ -60,17 +69,17 @@ class GameOfLifeScene: SKScene {
             .enumerate(\.nodes)
             .receive(on: RunLoop.main)
             .sink { [weak self] offset, element in
-                self?.squares[offset].alive = element
+                self?.cells[offset].alive = element
             }
             .store(in: &subscriptions)
-        
-        coordinator.events.send(.randomize)
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
-        coordinator.events.send(.randomize)
-        coordinator.notify(.tappedStartButton)
+        let x = Int(round((pos.x / size.width) * CGFloat(coordinator.currentState.gridSize.width)))
+        let y = Int(round((pos.y / size.height) * CGFloat(coordinator.currentState.gridSize.height)))
+        let index = (-y * coordinator.currentState.gridSize.width) + x
+        coordinator.notify(.tappedCellAt(index))
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -94,7 +103,7 @@ class GameOfLifeScene: SKScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -117,13 +126,14 @@ class Cell: SKShapeNode {
             ellipseIn: CGRect(origin: .zero, size: CGSize(width: diameter, height: diameter)), transform: nil)
         self.fillColor = .white
         self.lineWidth = 0
+        self.alpha = 0
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var alive: Bool = true {
+    var alive: Bool = false {
         willSet {
             if newValue != alive {
                 run(SKAction.fadeAlpha(to: newValue ? 1.0: 0.0, duration: 1.0), withKey: "Fade")

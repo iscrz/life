@@ -44,6 +44,10 @@ class RootViewController: UIViewController {
         }
         return
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        coordinator.notify(.tappedStartButton)
+    }
 
     override var shouldAutorotate: Bool {
         return true

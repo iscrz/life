@@ -16,6 +16,7 @@ enum GameOfLife {
         case tappedStartButton
         case evolve
         case randomize
+        case tappedCellAt(Int)
     }
     
     struct State: Cooridnator.State {
@@ -59,35 +60,10 @@ struct GameOfLifeEventHandler: EventHandler {
         case .tappedStartButton:
             actions.append(.start)
         case .evolve:
-            let oldState = state.nodes
+            let oldState = state
             state.nodes.enumerated().forEach { offset, element in
                 
-                var neighbors = [
-                    offset + state.gridSize.width,
-                    offset - state.gridSize.width]
-                
-                if (state.gridSize.width - offset) % state.gridSize.width != 0 {
-                    neighbors += [
-                        offset - 1,
-                        offset - 1 - state.gridSize.width,
-                        offset - 1 + state.gridSize.width,
-                    ]
-                }
-                
-                
-                if (offset + 1) % state.gridSize.width != 0 {
-                    neighbors += [
-                        offset + 1,
-                        offset + 1 - state.gridSize.width,
-                        offset + 1 + state.gridSize.width,
-                    ]
-                }
-                
-                
-                let alive = neighbors
-                    .compactMap { oldState[safe: $0] }
-                    .filter { $0 == true }
-                    .count
+                let alive = oldState.aliveNeighbors(offset)
                 
                 switch element {
                 case true where alive == 2 || alive == 3:
@@ -100,6 +76,16 @@ struct GameOfLifeEventHandler: EventHandler {
             }
         case .randomize:
             state.nodes = (0..<(state.gridSize.width * state.gridSize.height)).map { _ in Bool.random() }
+            
+        case let .tappedCellAt(index):
+            
+            let cells = state.neighbors(for: index) + [index]
+            cells.forEach { index in
+                state.nodes[index] = Bool.random()
+            }
+            
+            
+            break
         }
         
         return actions
@@ -116,8 +102,46 @@ extension Array {
     }
 }
 
-extension Collection where Element == Bool {
-    func aliveNeighbors(_ i: Int) {
+extension GameOfLife.State {
+    
+    func neighbors(for index: Int) -> [Int] {
+        var neighbors = [
+            index + gridSize.width,
+            index - gridSize.width]
         
+        if (gridSize.width - index) % gridSize.width != 0 {
+            neighbors += [
+                index - 1,
+                index - 1 - gridSize.width,
+                index - 1 + gridSize.width,
+            ]
+        }
+        
+        
+        if (index + 1) % gridSize.width != 0 {
+            neighbors += [
+                index + 1,
+                index + 1 - gridSize.width,
+                index + 1 + gridSize.width,
+            ]
+        }
+        
+        return neighbors
+    }
+    
+    fileprivate func aliveNeighbors(_ index: Int) -> Int {
+        return neighbors(for: index)
+            .compactMap { nodes[safe: $0] }
+            .filter { $0 == true }
+            .count
+    }
+}
+
+private struct Pattern {
+    let size: CGFloat
+    let pattern: [Int]
+    
+    var center: Int {
+        Int(floor(size * size / 2.0))
     }
 }
