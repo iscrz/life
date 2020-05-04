@@ -26,9 +26,9 @@ enum GameOfLife {
     }
     
     struct State: Cooridnator.State {
-        typealias Size = (width: Int, height: Int)
+        typealias GridSize = (width: Int, height: Int)
 
-        let gridSize: Size
+        let gridSize: GridSize
         
         var generation: Int = 0
         var nodes: [CellState]

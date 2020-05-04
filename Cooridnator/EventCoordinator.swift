@@ -62,10 +62,6 @@ public final class EventCoordinator<Handler: EventHandler> {
             }
             .store(in: &subscriptions)
     }
-    
-    public func notify(_ event: Event) {
-        events.send(event)
-    }
 }
 
 extension Publisher where Output: Event, Failure == Never {

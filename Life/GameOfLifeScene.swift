@@ -15,7 +15,7 @@ class GameOfLifeScene: SKScene {
     
     var subscriptions: Set<AnyCancellable> = []
     
-    let coordinator: EventCoordinator<GameOfLifeEventHandler>
+    let viewModel: ViewModel
     let nodeSize: Int
     
     private var cells: [CellView] = []
@@ -23,7 +23,7 @@ class GameOfLifeScene: SKScene {
     private var title: String = "aa"
     
     init(size: CGSize, nodeSize: Int, coordinator: EventCoordinator<GameOfLifeEventHandler>) {
-        self.coordinator = coordinator
+        self.viewModel = ViewModel(coordinator: coordinator)
         self.nodeSize = nodeSize
         super.init(size: size)
         self.anchorPoint = CGPoint(x: 0, y: 1)
@@ -35,13 +35,13 @@ class GameOfLifeScene: SKScene {
     
     override func sceneDidLoad() {
         setupView()
-        setupCoordinator()
+        setupSubscriptions()
     }
     
     func setupView() {
         
-        let width = coordinator.currentState.gridSize.width
-        let height = coordinator.currentState.gridSize.height
+        let width = viewModel.gridSize.width
+        let height = viewModel.gridSize.height
         
         let square = CellView(diameter: nodeSize)
         for y in 0..<height {
@@ -54,18 +54,16 @@ class GameOfLifeScene: SKScene {
         }
     }
     
-    func setupCoordinator() {
+    func setupSubscriptions() {
         
-        coordinator.state
-            .new(\.generation)
-            .map { "Generation \($0)" }
-            .receive(on: RunLoop.main)
+        // Subscribe to Title Changes
+        viewModel.generationString
             .assign(to: \.title, on: self)
             .store(in: &subscriptions)
         
-        coordinator.state
-            .enumerate(\.nodes)
-            .receive(on: RunLoop.main)
+    
+        // Subscribe to Cell Changes
+        viewModel.cellStates
             .sink { [weak self] offset, element in
                 self?.cells[offset].state = element
             }
@@ -73,11 +71,11 @@ class GameOfLifeScene: SKScene {
     }
     
     
+    // MARK - Touch Stuff
+    
     func touchDown(atPoint pos : CGPoint) {
-        let x = Int(round((pos.x / size.width) * CGFloat(coordinator.currentState.gridSize.width)))
-        let y = Int(round((pos.y / size.height) * CGFloat(coordinator.currentState.gridSize.height)))
-        let index = (-y * coordinator.currentState.gridSize.width) + x
-        coordinator.notify(.tappedCellAt(index))
+        let index = cellIndex(at: pos)
+        viewModel.notify(.tappedCellAt(index))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -89,11 +87,18 @@ class GameOfLifeScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        //for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+       //for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+    }
+    
+    func cellIndex(at pos: CGPoint) -> Int {
+        let gridSize = CGSize(width: viewModel.gridSize.width, height: viewModel.gridSize.height)
+        let x = Int(round((pos.x / size.width) * CGFloat(gridSize.width)))
+        let y = Int(round((pos.y / size.height) * CGFloat(gridSize.height)))
+        let index = (-y * Int(gridSize.width)) + x
+        return index
     }
 }
-

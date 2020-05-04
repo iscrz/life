@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		965ED5E124609E0100824C73 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965ED5E024609E0100824C73 /* CellView.swift */; };
+		965ED5E32460A22B00824C73 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965ED5E22460A22B00824C73 /* ViewModel.swift */; };
 		9661D769245E5CED00550521 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D768245E5CED00550521 /* AppDelegate.swift */; };
 		9661D76F245E5CED00550521 /* GameOfLifeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D76E245E5CED00550521 /* GameOfLifeScene.swift */; };
 		9661D771245E5CED00550521 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D770245E5CED00550521 /* RootViewController.swift */; };
@@ -74,6 +75,7 @@
 
 /* Begin PBXFileReference section */
 		965ED5E024609E0100824C73 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		965ED5E22460A22B00824C73 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		9661D765245E5CED00550521 /* Life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Life.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9661D768245E5CED00550521 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9661D76E245E5CED00550521 /* GameOfLifeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLifeScene.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				9661D770245E5CED00550521 /* RootViewController.swift */,
 				9661D76E245E5CED00550521 /* GameOfLifeScene.swift */,
+				965ED5E22460A22B00824C73 /* ViewModel.swift */,
 				96D68BFE245E958400E77B13 /* GameOfLifeEventHandler.swift */,
 				96D68C03245F79C100E77B13 /* ActionHandler.swift */,
 				965ED5E024609E0100824C73 /* CellView.swift */,
@@ -392,6 +395,7 @@
 				9661D771245E5CED00550521 /* RootViewController.swift in Sources */,
 				96D68BFF245E958400E77B13 /* GameOfLifeEventHandler.swift in Sources */,
 				9661D769245E5CED00550521 /* AppDelegate.swift in Sources */,
+				965ED5E32460A22B00824C73 /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
