@@ -26,7 +26,6 @@ class CooridnatorTests: XCTestCase {
         let expect = expectation(description: "Expecting it to work.")
         let coordinator = EventCoordinator(MockEventHandler(), state: .init())
         coordinator.state
-            .print()
             .sink { state in
                 if state.count == 3 {
                     expect.fulfill()

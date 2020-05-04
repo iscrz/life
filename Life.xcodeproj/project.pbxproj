@@ -24,6 +24,7 @@
 		9661D7BB245E60D900550521 /* EventCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D7B6245E60D900550521 /* EventCoordinator.swift */; };
 		96D68BFF245E958400E77B13 /* GameOfLife.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68BFE245E958400E77B13 /* GameOfLife.swift */; };
 		96D68C01245EA8CD00E77B13 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68C00245EA8CD00E77B13 /* State.swift */; };
+		96D68C04245F79C100E77B13 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68C03245F79C100E77B13 /* GameController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		96D68BFE245E958400E77B13 /* GameOfLife.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLife.swift; sourceTree = "<group>"; };
 		96D68C00245EA8CD00E77B13 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		96D68C02245F712B00E77B13 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		96D68C03245F79C100E77B13 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 				9661D777245E5CEF00550521 /* LaunchScreen.storyboard */,
 				9661D77A245E5CEF00550521 /* Info.plist */,
 				96D68BFE245E958400E77B13 /* GameOfLife.swift */,
+				96D68C03245F79C100E77B13 /* GameController.swift */,
 			);
 			path = Life;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9661D76F245E5CED00550521 /* GameScene.swift in Sources */,
+				96D68C04245F79C100E77B13 /* GameController.swift in Sources */,
 				9661D771245E5CED00550521 /* GameViewController.swift in Sources */,
 				96D68BFF245E958400E77B13 /* GameOfLife.swift in Sources */,
 				9661D769245E5CED00550521 /* AppDelegate.swift in Sources */,

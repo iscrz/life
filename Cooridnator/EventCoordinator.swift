@@ -17,11 +17,15 @@ public final class EventCoordinator<Handler: EventHandler> {
     /// Convenience alias for CoordinatorSystem.Action
     public typealias Action = Handler.A
     
-    public typealias Update = (State, [Action], PassthroughSubject<Event, Never>)
+    
+    public typealias Update = (State, Action, PassthroughSubject<Event, Never>)
+    
+    public typealias UpdatePublisher = AnyPublisher<Update, Never>
+    public typealias EventPublisher = PassthroughSubject<Event, Never>
 
     /// Current state of the EventCoordinator.
     
-    public let events = PassthroughSubject<Event, Never>()
+    public let events = EventPublisher()
     
     public let statePublisher: CurrentValueSubject<State, Never>
     private let actionPublisher = PassthroughSubject<Update, Never>()
@@ -36,17 +40,15 @@ public final class EventCoordinator<Handler: EventHandler> {
         statePublisher.value
     }
 
-    public var state: AnyPublisher<State, Never> {
-        Publishers.SubscribeOn(upstream: statePublisher, scheduler: workQueue, options: nil)
+    public lazy var state: AnyPublisher<State, Never> = {
+        statePublisher
             .eraseToAnyPublisher()
-        //statePublisher
-            //.eraseToAnyPublisher()
-    }
+    }()
     
-    public var updates: AnyPublisher<Update, Never> {
+    public lazy var updates: UpdatePublisher = {
         actionPublisher
             .eraseToAnyPublisher()
-    }
+    }()
 
     /// Creates an `EventCoordinator` with the following parameters.
     /// - Parameter eventHandler: `EventHandler` implementation to coordinate events and actions on
@@ -57,13 +59,19 @@ public final class EventCoordinator<Handler: EventHandler> {
         
         events
             .receive(on: workQueue)
-            .handle(self.eventHandler, state: self.statePublisher)
-            .sink { [weak self] state, action in
+            .handle(self.eventHandler, state: self.statePublisher) // map the event to a new state + action
+            .sink { [weak self] state, actions in
                 guard let self = self else { return }
                 self.statePublisher.send(state)
-                self.actionPublisher.send((state, action, self.events))
+                actions.forEach { action in
+                    self.actionPublisher.send((state, action, self.events))
+                }
             }
             .store(in: &subscriptions)
+    }
+    
+    public func notify(_ event: Event) {
+        events.send(event)
     }
 }
 

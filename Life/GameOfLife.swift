@@ -13,6 +13,7 @@ import Cooridnator
 enum GameOfLife {
     
     enum Event: Cooridnator.Event {
+        case tappedStartButton
         case evolve
         case randomize
     }
@@ -43,7 +44,8 @@ enum GameOfLife {
     }
     
     enum Action: Cooridnator.Action {
-        
+        case start
+        case stop
     }
 }
 
@@ -51,8 +53,11 @@ struct GameOfLifeEventHandler: EventHandler {
     
     @discardableResult
     func handle(event: GameOfLife.Event, state: inout GameOfLife.State) -> [GameOfLife.Action] {
+        var actions: [GameOfLife.Action] = []
         
         switch event {
+        case .tappedStartButton:
+            actions.append(.start)
         case .evolve:
             let oldState = state.nodes
             state.nodes.enumerated().forEach { offset, element in
@@ -97,7 +102,7 @@ struct GameOfLifeEventHandler: EventHandler {
             state.nodes = (0..<(state.gridSize.width * state.gridSize.height)).map { _ in Bool.random() }
         }
         
-        return []
+        return actions
     }
 }
 

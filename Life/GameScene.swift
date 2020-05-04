@@ -15,7 +15,8 @@ class GameScene: SKScene {
     
     var subscriptions: Set<AnyCancellable> = []
     
-    private(set) var coordinator: EventCoordinator<GameOfLifeEventHandler>!
+    let coordinator: EventCoordinator<GameOfLifeEventHandler>
+    let nodeSize: Int
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
@@ -27,15 +28,21 @@ class GameScene: SKScene {
     
     private var title: String = "aa"
     
+    init(size: CGSize, nodeSize: Int, coordinator: EventCoordinator<GameOfLifeEventHandler>) {
+        self.coordinator = coordinator
+        self.nodeSize = nodeSize
+        super.init(size: size)
+        self.anchorPoint = CGPoint(x: 0, y: 1)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func sceneDidLoad() {
         
-        let nodeSize: Int = 10
-        
-        let width = Int(ceil(size.width / CGFloat(nodeSize)))
-        let height = Int(ceil(size.height / CGFloat(nodeSize)))
-        
-        let state = GameOfLife.State(width: width, height: height)
-        coordinator = EventCoordinator(GameOfLifeEventHandler(), state: state)
+        let width = coordinator.currentState.gridSize.width
+        let height = coordinator.currentState.gridSize.height
         
         let square = SKShapeNode(circleOfRadius: CGFloat(nodeSize) / 2.0)
         square.fillColor = .white
@@ -44,7 +51,6 @@ class GameScene: SKScene {
             for x in 0..<width {
                 let square = square.copy() as! SKShapeNode
                 square.position = CGPoint(x: x * nodeSize, y: y * -nodeSize)
-                //square.position = CGPoint(x: 0, y: 0)
                 addChild(square)
                 squares.append(square)
             }
@@ -69,21 +75,8 @@ class GameScene: SKScene {
             }
             .store(in: &subscriptions)
         
-        
         coordinator.events.send(.randomize)
-        
-        /* OLD WAY
-        coordinator.state
-            .map(\.nodes)
-            .removeDuplicates()
-            .flatMap { $0.enumerated().publisher }
-            .sink {
-                self.squares[$0.offset].fillColor = $0.element ? .blue : .yellow
-            }
-            .store(in: &subscriptions)
-        */
-        
-        
+    
         self.lastUpdateTime = 0
         
         // Get label node from scene and store it for use later
@@ -107,14 +100,12 @@ class GameScene: SKScene {
                                               SKAction.removeFromParent()]))
         }
         
-        Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { _ in
-            self.coordinator.events.send(.evolve)
-        }
+        
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
-        coordinator.events.send(.evolve)
+        coordinator.notify(.tappedStartButton)
 //        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
 //            n.position = pos
 //            n.strokeColor = SKColor.green

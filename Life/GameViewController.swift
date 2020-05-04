@@ -9,61 +9,41 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import Combine
+import Cooridnator
 
 class GameViewController: UIViewController {
-
+    
+    var lifeActionHandler: ActionHandler!
+    var coordinator: EventCoordinator<GameOfLifeEventHandler>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
-        // including entities and graphs.
+        let size = view.bounds.size
+        let nodeSize: Int = 10
         
-        let sceneNode = GameScene(size: view.bounds.size)
-        sceneNode.anchorPoint = CGPoint(x: 0, y: 1)
-            
-            // Copy gameplay related content over to the scene
-            //sceneNode.entities = scene.entities
-            //sceneNode.graphs = scene.graphs
-            
-            // Set the scale mode to scale to fit the window
-            sceneNode.scaleMode = .aspectFill
-            
-            // Present the scene
-            if let view = self.view as! SKView? {
-                view.presentScene(sceneNode)
-                
-                view.ignoresSiblingOrder = true
-                
-                view.showsFPS = true
-                view.showsNodeCount = true
-            }
+        let width = Int(ceil(size.width / CGFloat(nodeSize))) + 1
+        let height = Int(ceil(size.height / CGFloat(nodeSize))) + 1
+        
+        let state = GameOfLife.State(width: width, height: height)
+        coordinator = EventCoordinator(GameOfLifeEventHandler(), state: state)
+        lifeActionHandler = ActionHandler(coordinator!.updates)
         
         
+        let sceneNode = GameScene(size: size, nodeSize: nodeSize, coordinator: coordinator)
+        sceneNode.scaleMode = .aspectFill
+            
+        // Present the scene
+        if let view = self.view as! SKView? {
+            view.presentScene(sceneNode)
+            
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
         return
-//
-//        if let scene = GKScene(fileNamed: "GameScene") {
-//
-//            // Get the SKScene from the loaded GKScene
-//            if let sceneNode = scene.rootNode as! GameScene? {
-//
-//                // Copy gameplay related content over to the scene
-//                sceneNode.entities = scene.entities
-//                sceneNode.graphs = scene.graphs
-//
-//                // Set the scale mode to scale to fit the window
-//                sceneNode.scaleMode = .aspectFill
-//
-//                // Present the scene
-//                if let view = self.view as! SKView? {
-//                    view.presentScene(sceneNode)
-//
-//                    view.ignoresSiblingOrder = true
-//
-//                    view.showsFPS = true
-//                    view.showsNodeCount = true
-//                }
-//            }
-//        }
     }
 
     override var shouldAutorotate: Bool {
