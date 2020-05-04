@@ -40,6 +40,8 @@ class GameOfLifeScene: SKScene {
     
     func setupView() {
         
+       
+        
         let width = viewModel.gridSize.width
         let height = viewModel.gridSize.height
         
@@ -52,6 +54,12 @@ class GameOfLifeScene: SKScene {
                 cells.append(square)
             }
         }
+        
+        let titleView = SKLabelNode(fontNamed: "Helventica")
+               titleView.fontSize = 50
+               titleView.text = "asdf"
+               titleView.position = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
+               addChild(titleView)
     }
     
     func setupSubscriptions() {
