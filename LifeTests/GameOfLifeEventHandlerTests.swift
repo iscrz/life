@@ -37,7 +37,7 @@ class GameOfLifeEventHandlerTests: XCTestCase {
         
         handler.handle(event: .evolve, state: &state)
         
-        XCTAssertEqual(state.nodes.map { $0 == true ? 1 : 0 },
+        XCTAssertEqual(state.nodes.asBinary(),
         [
             0, 0, 0,
             0, 0, 0,
@@ -58,7 +58,7 @@ class GameOfLifeEventHandlerTests: XCTestCase {
         
         handler.handle(event: .evolve, state: &state)
         
-        XCTAssertEqual(state.nodes.map { $0 == true ? 1 : 0 },
+        XCTAssertEqual(state.nodes.asBinary(),
         [
             0, 0, 0,
             1, 1, 1,
@@ -79,7 +79,7 @@ class GameOfLifeEventHandlerTests: XCTestCase {
         
         handler.handle(event: .evolve, state: &state)
         
-        XCTAssertEqual(state.nodes.map { $0 == true ? 1 : 0 },
+        XCTAssertEqual(state.nodes.asBinary(),
         [
             0, 1, 0,
             0, 1, 0,
@@ -100,7 +100,7 @@ class GameOfLifeEventHandlerTests: XCTestCase {
         
         handler.handle(event: .evolve, state: &state)
         
-        XCTAssertEqual(state.nodes.map { $0 == true ? 1 : 0 },
+        XCTAssertEqual(state.nodes.asBinary(),
         [
             0, 0, 0,
             0, 1, 0,
@@ -121,7 +121,7 @@ class GameOfLifeEventHandlerTests: XCTestCase {
         
         handler.handle(event: .evolve, state: &state)
         
-        XCTAssertEqual(state.nodes.map { $0 == true ? 1 : 0 },
+        XCTAssertEqual(state.nodes.asBinary(),
         [
             0, 0, 0,
             1, 1, 0,
@@ -142,7 +142,7 @@ class GameOfLifeEventHandlerTests: XCTestCase {
         
         handler.handle(event: .evolve, state: &state)
         
-        XCTAssertEqual(state.nodes.map { $0 == true ? 1 : 0 },
+        XCTAssertEqual(state.nodes.asBinary(),
         [
             0, 0, 0,
             0, 1, 1,
@@ -163,7 +163,7 @@ class GameOfLifeEventHandlerTests: XCTestCase {
         
         handler.handle(event: .evolve, state: &state)
         
-        XCTAssertEqual(state.nodes.map { $0 == true ? 1 : 0 },
+        XCTAssertEqual(state.nodes.asBinary(),
         [
             0, 0, 0,
             1, 0, 1,
@@ -184,7 +184,7 @@ class GameOfLifeEventHandlerTests: XCTestCase {
         
         handler.handle(event: .evolve, state: &state)
         
-        XCTAssertEqual(state.nodes.map { $0 == true ? 1 : 0 },
+        XCTAssertEqual(state.nodes.asBinary(),
         [
             0, 1, 0,
             0, 0, 0,
@@ -206,7 +206,7 @@ class GameOfLifeEventHandlerTests: XCTestCase {
         
         handler.handle(event: .evolve, state: &state)
         
-        XCTAssertEqual(state.nodes.map { $0 == true ? 1 : 0 },
+        XCTAssertEqual(state.nodes.asBinary(),
         [
             0, 0, 0, 0,
             0, 1, 1, 0,
@@ -214,4 +214,10 @@ class GameOfLifeEventHandlerTests: XCTestCase {
             0, 0, 0, 0,])
     }
 
+}
+
+extension Array where Element == CellState {
+    func asBinary() -> [Int] {
+        return map { $0.isAlive ? 1 : 0 }
+    }
 }

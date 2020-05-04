@@ -10,6 +10,12 @@ import Foundation
 import CoreGraphics
 import Cooridnator
 
+enum CellState: Equatable {
+    case alive, dead
+    var isAlive: Bool { self == .alive}
+    static func random() -> CellState { Bool.random() ? .alive : .dead }
+}
+
 enum GameOfLife {
     
     enum Event: Cooridnator.Event {
@@ -25,23 +31,13 @@ enum GameOfLife {
         let gridSize: Size
         
         var generation: Int = 0
-        var nodes: [Bool]
+        var nodes: [CellState]
         
         init(width: Int, height: Int, nodes: [Int]? = nil) {
             self.gridSize = (width: width, height: height)
-            self.nodes = nodes?.map { $0 >= 1 ? true : false }
-                         ?? [Bool].init(repeating: false, count: width * height)
+            self.nodes = nodes?.map { $0 >= 1 ? .alive : .dead }
+                ?? [CellState].init(repeating: .dead, count: width * height)
         }
-        
-        struct Cell {
-            let point: (x: Int, y: Int)
-            var status: Status
-            enum Status {
-                case alive
-                case dead
-            }
-        }
-        
     }
     
     enum Action: Cooridnator.Action {
@@ -67,9 +63,9 @@ struct GameOfLifeEventHandler: EventHandler {
                 let alive = oldState.aliveNeighbors(offset)
                 
                 switch element {
-                case true where alive == 2 || alive == 3: break
-                case false where alive == 3: state.nodes[offset] = true
-                default: state.nodes[offset] = false
+                case .alive where alive == 2 || alive == 3: break
+                case .dead  where alive == 3: state.nodes[offset] = .alive
+                default: state.nodes[offset] = .dead
                 }
             }
             
@@ -78,13 +74,13 @@ struct GameOfLifeEventHandler: EventHandler {
             }
             
         case .randomize:
-            state.nodes = (0..<(state.gridSize.width * state.gridSize.height)).map { _ in Bool.random() }
+            state.nodes = (0..<(state.gridSize.width * state.gridSize.height)).map { _ in CellState.random() }
             
         case let .tappedCellAt(index):
             
             let cells = state.neighbors(for: index) + [index]
             cells.forEach { index in
-                state.nodes[index] = Bool.random()
+                state.nodes[index] = CellState.random()
             }
             
             
@@ -134,7 +130,7 @@ extension GameOfLife.State {
     fileprivate func aliveNeighbors(_ index: Int) -> Int {
         return neighbors(for: index)
             .compactMap { nodes[safe: $0] }
-            .filter { $0 == true }
+            .filter { $0.isAlive }
             .count
     }
 }
