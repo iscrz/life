@@ -30,7 +30,6 @@ class GameViewController: UIViewController {
         coordinator = EventCoordinator(GameOfLifeEventHandler(), state: state)
         lifeActionHandler = ActionHandler(coordinator!.updates)
         
-        
         let sceneNode = GameScene(size: size, nodeSize: nodeSize, coordinator: coordinator)
         sceneNode.scaleMode = .aspectFill
             

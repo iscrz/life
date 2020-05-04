@@ -17,7 +17,7 @@ class ActionHandler {
     init(_ updates: EventCoordinator<GameOfLifeEventHandler>.UpdatePublisher) {
         updates
             .receive(on: RunLoop.main)
-            .sink { [weak self] _, action, notify in
+            .sink { [weak self] action, state, notify in
                 switch action {
                 case .start:
                     self?.startTimer(notify: notify)

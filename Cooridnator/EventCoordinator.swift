@@ -18,7 +18,7 @@ public final class EventCoordinator<Handler: EventHandler> {
     public typealias Action = Handler.A
     
     
-    public typealias Update = (State, Action, PassthroughSubject<Event, Never>)
+    public typealias Update = (Action, State, PassthroughSubject<Event, Never>)
     
     public typealias UpdatePublisher = AnyPublisher<Update, Never>
     public typealias EventPublisher = PassthroughSubject<Event, Never>
@@ -27,12 +27,11 @@ public final class EventCoordinator<Handler: EventHandler> {
     
     public let events = EventPublisher()
     
-    public let statePublisher: CurrentValueSubject<State, Never>
-    private let actionPublisher = PassthroughSubject<Update, Never>()
+    private let statePublisher: CurrentValueSubject<State, Never>
+    private let actionPublisher = PassthroughSubject<[Action], Never>()
 
     private var subscriptions = [AnyCancellable]()
     private let workQueue = DispatchQueue(label: "com.isaac.eventCoordinator")
-    
     
     private var eventHandler: Handler
     
@@ -44,11 +43,18 @@ public final class EventCoordinator<Handler: EventHandler> {
         statePublisher
             .eraseToAnyPublisher()
     }()
+
+    
+    
     
     public lazy var updates: UpdatePublisher = {
         actionPublisher
+            .receive(on: workQueue)
+            .flatMap { $0.publisher }
+            .zip(state, Just(self.events))
             .eraseToAnyPublisher()
     }()
+    
 
     /// Creates an `EventCoordinator` with the following parameters.
     /// - Parameter eventHandler: `EventHandler` implementation to coordinate events and actions on
@@ -63,9 +69,7 @@ public final class EventCoordinator<Handler: EventHandler> {
             .sink { [weak self] state, actions in
                 guard let self = self else { return }
                 self.statePublisher.send(state)
-                actions.forEach { action in
-                    self.actionPublisher.send((state, action, self.events))
-                }
+                self.actionPublisher.send(actions)
             }
             .store(in: &subscriptions)
     }
