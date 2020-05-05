@@ -18,14 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        let state = GameOfLife.State(width: 30, height: 30)
+        let state = GameOfLife.State(width: 40, height: 40)
         coordinator = EventCoordinator(GameOfLifeEventHandler(), state: state)
         lifeActionHandler = ActionHandler(coordinator!.updates)
         
-        
-        
         let viewModel = ViewModel(coordinator: coordinator)
-        
         let contentView = ContentView(viewModel: viewModel)
 
         // Use a UIHostingController as window root view controller.

@@ -23,9 +23,16 @@ class ViewModel: ObservableObject {
         self.height = coordinator.currentState.gridSize.height
 
         coordinator.state
-            .new(\.generation)
+            .map(\.nodes)
+            .removeDuplicates()
+            .measureInterval(using: RunLoop.main)
             .sink { print("gen\($0)")}
             .store(in: &subscriptions)
+        
+//        coordinator.state
+//            .new(\.generation)
+//            .sink { print("gen\($0)")}
+//            .store(in: &subscriptions)
         
         coordinator.state
             .map(\.nodes)
@@ -35,19 +42,7 @@ class ViewModel: ObservableObject {
             .store(in: &subscriptions)
         
         coordinator.events.send(.randomize)
-        coordinator.events.send(.tappedStartButton)
+        coordinator.events.send(.tappedStartButton(0.05))
     }
-    
-    
-    
-    //@Published var items = [BookItem]()
 }
-
-//lazy var cellStates: AnyPublisher<(offset: Int, element: CellState), Never> = {
-//    coordinator.state
-//        .enumerate(\.nodes) // ignores duplicates
-//        .receive(on: RunLoop.main)
-//        .eraseToAnyPublisher()
-//}()
-
 

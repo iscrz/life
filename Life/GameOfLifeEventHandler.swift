@@ -19,7 +19,7 @@ enum CellState: Equatable {
 enum GameOfLife {
     
     enum Event: Cooridnator.Event {
-        case tappedStartButton
+        case tappedStartButton(TimeInterval)
         case evolve
         case randomize
         case tappedCellAt(Int)
@@ -41,7 +41,7 @@ enum GameOfLife {
     }
     
     enum Action: Cooridnator.Action {
-        case start
+        case start(TimeInterval)
         case stop
     }
 }
@@ -53,8 +53,8 @@ struct GameOfLifeEventHandler: EventHandler {
         var actions: [GameOfLife.Action] = []
         
         switch event {
-        case .tappedStartButton:
-            actions.append(.start)
+        case let .tappedStartButton(interval):
+            actions.append(.start(interval))
             
         case .evolve:
             let oldState = state

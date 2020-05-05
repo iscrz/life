@@ -14,12 +14,13 @@ struct ContentView: View {
     
     var body: some View {
         GridStack(
-            rows: self.viewModel.width,
-            columns: self.viewModel.height,
+            rows: self.viewModel.height,
+            columns: self.viewModel.width,
             values:  self.$viewModel.cellState) { value in
-            Circle()
-                .fill( value.isAlive ? Color.blue : Color.white)
-                .frame(width: 10, height: 10)
+                Circle()
+                    .fill( value.isAlive ? Color.white : Color.black)
+                    .frame(width: 10, height: 10)
+                    //.animation(.linear(duration: 1.0))
         }
     }
 }
@@ -42,11 +43,4 @@ struct GridStack<Content: View>: View {
             }
         }
     }
-
-//    init(rows: Int, columns: Int, values: Binding<[CellState]>, @ViewBuilder content: @escaping (CellState) -> Content) {
-//        self.rows = rows
-//        self.columns = columns
-//        self.content = content
-//        self.values = values
-//    }
 }
