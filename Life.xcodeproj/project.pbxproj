@@ -29,9 +29,9 @@
 		96C90C6C2461517600844C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96C90C6B2461517600844C6D /* Assets.xcassets */; };
 		96C90C6F2461517600844C6D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96C90C6E2461517600844C6D /* Preview Assets.xcassets */; };
 		96C90C722461517600844C6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96C90C702461517600844C6D /* LaunchScreen.storyboard */; };
-		96C90C78246154A300844C6D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965ED5E22460A22B00824C73 /* ViewModel.swift */; };
 		96C90C79246154A800844C6D /* GameOfLifeEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68BFE245E958400E77B13 /* GameOfLifeEventHandler.swift */; };
 		96C90C7A246154AB00844C6D /* ActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68C03245F79C100E77B13 /* ActionHandler.swift */; };
+		96C90C7D2461560300844C6D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C90C7C2461560300844C6D /* ViewModel.swift */; };
 		96D68BFF245E958400E77B13 /* GameOfLifeEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68BFE245E958400E77B13 /* GameOfLifeEventHandler.swift */; };
 		96D68C01245EA8CD00E77B13 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68C00245EA8CD00E77B13 /* State.swift */; };
 		96D68C04245F79C100E77B13 /* ActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68C03245F79C100E77B13 /* ActionHandler.swift */; };
@@ -112,6 +112,7 @@
 		96C90C6E2461517600844C6D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		96C90C712461517600844C6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96C90C732461517600844C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		96C90C7C2461560300844C6D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		96D68BFE245E958400E77B13 /* GameOfLifeEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLifeEventHandler.swift; sourceTree = "<group>"; };
 		96D68C00245EA8CD00E77B13 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		96D68C02245F712B00E77B13 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 			children = (
 				9661D770245E5CED00550521 /* RootViewController.swift */,
 				9661D76E245E5CED00550521 /* GameOfLifeScene.swift */,
+				965ED5E22460A22B00824C73 /* ViewModel.swift */,
 				96C90C7B246154C600844C6D /* Shared */,
 				965ED5E024609E0100824C73 /* CellView.swift */,
 				9663D518245FA17B00E4C674 /* Resources */,
@@ -243,6 +245,7 @@
 			children = (
 				96C90C652461517400844C6D /* AppDelegate.swift */,
 				96C90C672461517400844C6D /* SceneDelegate.swift */,
+				96C90C7C2461560300844C6D /* ViewModel.swift */,
 				96C90C692461517400844C6D /* ContentView.swift */,
 				96C90C6B2461517600844C6D /* Assets.xcassets */,
 				96C90C702461517600844C6D /* LaunchScreen.storyboard */,
@@ -263,7 +266,6 @@
 		96C90C7B246154C600844C6D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				965ED5E22460A22B00824C73 /* ViewModel.swift */,
 				96D68BFE245E958400E77B13 /* GameOfLifeEventHandler.swift */,
 				96D68C03245F79C100E77B13 /* ActionHandler.swift */,
 			);
@@ -516,11 +518,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96C90C78246154A300844C6D /* ViewModel.swift in Sources */,
 				96C90C7A246154AB00844C6D /* ActionHandler.swift in Sources */,
 				96C90C662461517400844C6D /* AppDelegate.swift in Sources */,
 				96C90C79246154A800844C6D /* GameOfLifeEventHandler.swift in Sources */,
 				96C90C682461517400844C6D /* SceneDelegate.swift in Sources */,
+				96C90C7D2461560300844C6D /* ViewModel.swift in Sources */,
 				96C90C6A2461517400844C6D /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
