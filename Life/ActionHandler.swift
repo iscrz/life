@@ -19,8 +19,8 @@ class ActionHandler {
             .receive(on: RunLoop.main)
             .sink { [weak self] action, state, notify in
                 switch action {
-                case .start:
-                    self?.startTimer(notify: notify)
+                case let .start(interval):
+                    self?.startTimer(interval, notify: notify)
                 case .stop:
                     self?.stopTimer()
                 }
@@ -28,9 +28,9 @@ class ActionHandler {
             .store(in: &subscriptions)
     }
     
-    private func startTimer(notify: EventCoordinator<GameOfLifeEventHandler>.EventPublisher) {
+    private func startTimer(_ interval: TimeInterval, notify: EventCoordinator<GameOfLifeEventHandler>.EventPublisher) {
         stopTimer()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true, block: { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: { _ in
             notify.send(.evolve)
         })
     }

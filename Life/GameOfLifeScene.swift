@@ -65,15 +65,17 @@ class GameOfLifeScene: SKScene {
     func setupSubscriptions() {
         
         // Subscribe to Title Changes
-        viewModel.generationString
+        viewModel.$generationString
             .assign(to: \.title, on: self)
             .store(in: &subscriptions)
         
     
         // Subscribe to Cell Changes
-        viewModel.cellStates
-            .sink { [weak self] offset, element in
-                self?.cells[offset].state = element
+        viewModel.$cellStates
+            .sink { [weak self] foo in
+                
+                //index.
+                //self?.cells[offset].state = element
             }
             .store(in: &subscriptions)
     }

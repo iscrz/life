@@ -51,7 +51,7 @@ public final class EventCoordinator<Handler: EventHandler> {
     public init(_ eventHandler: Handler, state: State) {
         self.eventHandler = eventHandler
         self.statePublisher = CurrentValueSubject<State, Never>(state)
-        
+
         events
             .receive(on: workQueue)
             .handle(self.eventHandler, state: self.statePublisher)

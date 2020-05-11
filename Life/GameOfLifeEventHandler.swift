@@ -10,19 +10,29 @@ import Foundation
 import CoreGraphics
 import Cooridnator
 
-enum CellState: Equatable {
-    case alive, dead
-    var isAlive: Bool { self == .alive}
-    static func random() -> CellState { Bool.random() ? .alive : .dead }
+struct Cell: Identifiable, Equatable {
+    
+    let id = UUID()
+    var state: State = .dead
+    var isAlive: Bool { state == .alive}
+    
+    enum State: Equatable {
+        case alive, dead
+        static func random() -> State { Bool.random() ? .alive : .dead }
+    }
+    
+    static func alive() -> Cell { return Cell(state: .alive) }
+    static func dead() -> Cell { return Cell(state: .dead) }
+    static func random() -> Cell { Bool.random() ? .alive() : .dead() }
 }
 
 enum GameOfLife {
     
     enum Event: Cooridnator.Event {
-        case tappedStartButton
+        case tappedStartButton(TimeInterval)
         case evolve
         case randomize
-        case tappedCellAt(Int)
+        case tappedCell(UUID)
     }
     
     struct State: Cooridnator.State {
@@ -30,18 +40,19 @@ enum GameOfLife {
 
         let gridSize: GridSize
         
+        var timeInterval: TimeInterval = 0.05
         var generation: Int = 0
-        var nodes: [CellState]
+        var nodes: [Cell]
         
         init(width: Int, height: Int, nodes: [Int]? = nil) {
             self.gridSize = (width: width, height: height)
-            self.nodes = nodes?.map { $0 >= 1 ? .alive : .dead }
-                ?? [CellState].init(repeating: .dead, count: width * height)
+            self.nodes = nodes?.map { $0 >= 1 ? .alive() : .dead() }
+                ?? (0..<(width * height)).map { _ in Cell.random() }
         }
     }
     
     enum Action: Cooridnator.Action {
-        case start
+        case start(TimeInterval)
         case stop
     }
 }
@@ -53,8 +64,9 @@ struct GameOfLifeEventHandler: EventHandler {
         var actions: [GameOfLife.Action] = []
         
         switch event {
-        case .tappedStartButton:
-            actions.append(.start)
+        case let .tappedStartButton(interval):
+            state.timeInterval = interval
+            actions.append(.start(interval))
             
         case .evolve:
             let oldState = state
@@ -62,10 +74,10 @@ struct GameOfLifeEventHandler: EventHandler {
                 
                 let alive = oldState.aliveNeighbors(offset)
                 
-                switch element {
+                switch element.state {
                 case .alive where alive == 2 || alive == 3: break
-                case .dead  where alive == 3: state.nodes[offset] = .alive
-                default: state.nodes[offset] = .dead
+                case .dead  where alive == 3: state.nodes[offset].state = .alive
+                default: state.nodes[offset].state = .dead
                 }
             }
             
@@ -74,14 +86,20 @@ struct GameOfLifeEventHandler: EventHandler {
             }
             
         case .randomize:
-            state.nodes = (0..<(state.gridSize.width * state.gridSize.height)).map { _ in CellState.random() }
+            state.nodes = (0..<(state.gridSize.width * state.gridSize.height)).map { _ in Cell.random() }
             
-        case let .tappedCellAt(index):
-            
+        case let .tappedCell(id):
+            print(id)
+            guard let index = state.nodes.firstIndex(where: { $0.id == id }) else {
+                break }
+            print(index)
             let cells = state.neighbors(for: index) + [index]
-            cells.forEach { index in
-                state.nodes[index] = CellState.random()
-            }
+            cells
+                .filter { $0 >= 0 && $0 < state.nodes.count }
+                .forEach { index in
+                    state.nodes[index].state = Cell.State.random()
+                }
+            print(cells)
             
             
             break
