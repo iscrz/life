@@ -22,7 +22,7 @@ struct ContentView: View {
     var body: some View {
 
         return VStack {
-            Text("Label")
+            Text(self.viewModel.detlaString)
             GridStack(
                 rows: self.viewModel.height,
                 columns: self.viewModel.width,

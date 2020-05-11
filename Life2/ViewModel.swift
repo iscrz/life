@@ -18,7 +18,7 @@ class ViewModel: ObservableObject {
     let height: Int
     
     @Published var cellState: [Cell] = []
-    @Published var time: [Cell] = []
+    @Published var detlaString: String = ""
 
     init(coordinator: EventCoordinator<GameOfLifeEventHandler>) {
         
@@ -27,20 +27,34 @@ class ViewModel: ObservableObject {
         self.width = coordinator.currentState.gridSize.width
         self.height = coordinator.currentState.gridSize.height
 
-        coordinator.state
-            .new(\.nodes)
-            .measureInterval(using: RunLoop.main)
-            .sink { print("gen\($0.timeInterval)")}
-            //.store(in: &subscriptions)
+        setupSubscriptions()
         
+        coordinator.events.send(.randomize)
+        coordinator.events.send(.tappedStartButton(0.05))
+    }
+    
+    func setupSubscriptions() {
+        
+        // Display the time between new state events
+        coordinator.state
+            .measureInterval(using: RunLoop.main)
+            .combineLatest(coordinator.state)
+            .map { (stride, state) -> String in
+                let delta = state.timeInterval - stride.timeInterval
+                let nf = NumberFormatter()
+                nf.maximumFractionDigits = 4
+                return "\(abs(delta) < 0.2 ? "👍" : "👎") \(nf.string(for: delta) ?? "")"
+            }
+            .receive(on: RunLoop.main)
+            .assign(to: \.detlaString, on: self)
+            .store(in: &subscriptions)
+        
+        // Updates cells if node array changes
         coordinator.state
             .new(\.nodes)
             .receive(on: RunLoop.main)
             .assign(to: \ViewModel.cellState, on: self)
             .store(in: &subscriptions)
-        
-        //coordinator.events.send(.randomize)
-        coordinator.events.send(.tappedStartButton(0.05))
     }
     
     func notify(_ event: GameOfLife.Event) {
