@@ -11,38 +11,40 @@ import Cooridnator
 
 class ViewModel: ObservableObject {
     
+    private var coordinator: EventCoordinator<GameOfLifeEventHandler>
     private var subscriptions: Set<AnyCancellable> = []
     
     let width: Int
     let height: Int
     
-    @Published var cellState: [CellState] = []
+    @Published var cellState: [Cell] = []
+    @Published var time: [Cell] = []
 
     init(coordinator: EventCoordinator<GameOfLifeEventHandler>) {
+        
+        self.coordinator = coordinator
+        
         self.width = coordinator.currentState.gridSize.width
         self.height = coordinator.currentState.gridSize.height
 
         coordinator.state
-            .map(\.nodes)
-            .removeDuplicates()
+            .new(\.nodes)
             .measureInterval(using: RunLoop.main)
-            .sink { print("gen\($0)")}
-            .store(in: &subscriptions)
-        
-//        coordinator.state
-//            .new(\.generation)
-//            .sink { print("gen\($0)")}
-//            .store(in: &subscriptions)
+            .sink { print("gen\($0.timeInterval)")}
+            //.store(in: &subscriptions)
         
         coordinator.state
-            .map(\.nodes)
-            .removeDuplicates()
+            .new(\.nodes)
             .receive(on: RunLoop.main)
             .assign(to: \ViewModel.cellState, on: self)
             .store(in: &subscriptions)
         
-        coordinator.events.send(.randomize)
+        //coordinator.events.send(.randomize)
         coordinator.events.send(.tappedStartButton(0.05))
+    }
+    
+    func notify(_ event: GameOfLife.Event) {
+        self.coordinator.events.send(event)
     }
 }
 

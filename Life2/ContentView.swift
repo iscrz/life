@@ -12,15 +12,28 @@ import Combine
 struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
     
+    func tap(id: UUID) -> some Gesture {
+        TapGesture()
+            .onEnded { _ in
+                self.viewModel.notify(.tappedCell(id))
+            }
+    }
+    
     var body: some View {
-        GridStack(
-            rows: self.viewModel.height,
-            columns: self.viewModel.width,
-            values:  self.$viewModel.cellState) { value in
-                Circle()
-                    .fill( value.isAlive ? Color.white : Color.black)
-                    .frame(width: 10, height: 10)
-                    //.animation(.linear(duration: 1.0))
+
+        return VStack {
+            Text("Label")
+            GridStack(
+                rows: self.viewModel.height,
+                columns: self.viewModel.width,
+                values:  self.$viewModel.cellState) { value in
+                    Circle()
+                        .fill( value.isAlive ? Color.white : Color.black)
+                        .frame(width: 10, height: 10)
+                        .gesture(self.tap(id: value.id))
+                        .animation(.linear(duration: 1.0))
+                    
+            }
         }
     }
 }
@@ -28,8 +41,8 @@ struct ContentView: View {
 struct GridStack<Content: View>: View {
     let rows: Int
     let columns: Int
-    @Binding var values: [CellState]
-    let content: (CellState) -> Content
+    @Binding var values: [Cell]
+    let content: (Cell) -> Content
 
     var body: some View {
         VStack(spacing: 0) {
@@ -37,7 +50,7 @@ struct GridStack<Content: View>: View {
                 HStack(spacing: 0) {
                     ForEach(0 ..< self.columns, id: \.self) { column -> Content in
                         let index = row * self.columns + column
-                        return self.content(index >= self.values.count ? .dead : self.values[index])
+                        return self.content(index >= self.values.count ? .dead() : self.values[index])
                     }
                 }
             }
