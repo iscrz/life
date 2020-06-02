@@ -9,12 +9,13 @@
 import Combine
 import Cooridnator
 
-class ActionHandler {
+class GameOfLifeAsyncActionHandler {
     
     private var timer: Timer?
     private var subscriptions: Set<AnyCancellable> = []
     
     init(_ updates: EventCoordinator<GameOfLifeEventHandler>.UpdatePublisher) {
+        
         updates
             .receive(on: RunLoop.main)
             .sink { [weak self] action, state, notify in

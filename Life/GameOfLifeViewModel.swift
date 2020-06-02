@@ -9,7 +9,7 @@
 import Combine
 import Cooridnator
 
-class ViewModel: ObservableObject {
+class GameOfLifeViewModel: ObservableObject {
     
     private var coordinator: EventCoordinator<GameOfLifeEventHandler>
     private var subscriptions: Set<AnyCancellable> = []
@@ -19,6 +19,7 @@ class ViewModel: ObservableObject {
     
     @Published var cellState: [Cell] = []
     @Published var detlaString: String = ""
+    @Published var generationString: String = ""
 
     init(coordinator: EventCoordinator<GameOfLifeEventHandler>) {
         
@@ -34,27 +35,22 @@ class ViewModel: ObservableObject {
     }
     
     func setupSubscriptions() {
-        
-        // Display the time between new state events
-        coordinator.state
-            .measureInterval(using: RunLoop.main)
-            .combineLatest(coordinator.state)
-            .map { (stride, state) -> String in
-                let delta = state.timeInterval - stride.timeInterval
-                let nf = NumberFormatter()
-                nf.maximumFractionDigits = 4
-                return "\(abs(delta) < 0.2 ? "👍" : "👎") \(nf.string(for: delta) ?? "")"
-            }
-            .receive(on: RunLoop.main)
-            .assign(to: \.detlaString, on: self)
-            .store(in: &subscriptions)
-        
+      
         // Updates cells if node array changes
         coordinator.state
             .new(\.nodes)
             .receive(on: RunLoop.main)
-            .assign(to: \ViewModel.cellState, on: self)
+            .assign(to: \GameOfLifeViewModel.cellState, on: self)
             .store(in: &subscriptions)
+        
+        // Updates the Generation String when updated
+        coordinator.state
+            .new(\.generation)
+            .map { "Generation #\($0)"}
+            .receive(on: RunLoop.main)
+            .assign(to: \GameOfLifeViewModel.generationString, on: self)
+            .store(in: &subscriptions)
+        
     }
     
     func notify(_ event: GameOfLife.Event) {

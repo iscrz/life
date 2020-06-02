@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  GameOfLifeView.swift
 //  Life2
 //
 //  Created by Work on 5/5/20.
@@ -9,8 +9,9 @@
 import SwiftUI
 import Combine
 
-struct ContentView: View {
-    @ObservedObject var viewModel: ViewModel
+struct GameOfLifeView: View {
+    
+    @ObservedObject var viewModel: GameOfLifeViewModel
     
     func tap(id: UUID) -> some Gesture {
         TapGesture()
@@ -22,7 +23,17 @@ struct ContentView: View {
     var body: some View {
 
         return VStack {
-            Text(self.viewModel.detlaString)
+            HStack {
+                Text(self.viewModel.generationString)
+                //Text(self.viewModel.detlaString)
+            }
+            
+            Button(action: {
+                self.viewModel.notify(.randomize)
+            }) {
+                Text("Reset")
+            }
+            
             GridStack(
                 rows: self.viewModel.height,
                 columns: self.viewModel.width,
@@ -34,6 +45,7 @@ struct ContentView: View {
                         .animation(.linear(duration: 1.0))
                     
             }
+            
         }
     }
 }

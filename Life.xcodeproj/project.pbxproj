@@ -7,59 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		965ED5E124609E0100824C73 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965ED5E024609E0100824C73 /* CellView.swift */; };
-		965ED5E32460A22B00824C73 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965ED5E22460A22B00824C73 /* ViewModel.swift */; };
-		9661D769245E5CED00550521 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D768245E5CED00550521 /* AppDelegate.swift */; };
-		9661D76F245E5CED00550521 /* GameOfLifeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D76E245E5CED00550521 /* GameOfLifeScene.swift */; };
-		9661D771245E5CED00550521 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D770245E5CED00550521 /* RootViewController.swift */; };
-		9661D774245E5CED00550521 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9661D772245E5CED00550521 /* Main.storyboard */; };
-		9661D776245E5CEF00550521 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9661D775245E5CEF00550521 /* Assets.xcassets */; };
-		9661D779245E5CEF00550521 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9661D777245E5CEF00550521 /* LaunchScreen.storyboard */; };
 		9661D784245E5CF000550521 /* GameOfLifeEventHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D783245E5CF000550521 /* GameOfLifeEventHandlerTests.swift */; };
 		9661D79C245E5E4A00550521 /* Cooridnator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9661D793245E5E4A00550521 /* Cooridnator.framework */; };
 		9661D7A3245E5E4A00550521 /* CooridnatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D7A2245E5E4A00550521 /* CooridnatorTests.swift */; };
 		9661D7A5245E5E4A00550521 /* Cooridnator.h in Headers */ = {isa = PBXBuildFile; fileRef = 9661D795245E5E4A00550521 /* Cooridnator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9661D7A8245E5E4A00550521 /* Cooridnator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9661D793245E5E4A00550521 /* Cooridnator.framework */; };
-		9661D7A9245E5E4A00550521 /* Cooridnator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9661D793245E5E4A00550521 /* Cooridnator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9661D7B9245E60D900550521 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D7B4245E60D800550521 /* EventHandler.swift */; };
 		9661D7BB245E60D900550521 /* EventCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9661D7B6245E60D900550521 /* EventCoordinator.swift */; };
 		96C90C662461517400844C6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C90C652461517400844C6D /* AppDelegate.swift */; };
 		96C90C682461517400844C6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C90C672461517400844C6D /* SceneDelegate.swift */; };
-		96C90C6A2461517400844C6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C90C692461517400844C6D /* ContentView.swift */; };
+		96C90C6A2461517400844C6D /* GameOfLifeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C90C692461517400844C6D /* GameOfLifeView.swift */; };
 		96C90C6C2461517600844C6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96C90C6B2461517600844C6D /* Assets.xcassets */; };
 		96C90C6F2461517600844C6D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96C90C6E2461517600844C6D /* Preview Assets.xcassets */; };
 		96C90C722461517600844C6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96C90C702461517600844C6D /* LaunchScreen.storyboard */; };
 		96C90C79246154A800844C6D /* GameOfLifeEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68BFE245E958400E77B13 /* GameOfLifeEventHandler.swift */; };
-		96C90C7A246154AB00844C6D /* ActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68C03245F79C100E77B13 /* ActionHandler.swift */; };
-		96C90C7D2461560300844C6D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C90C7C2461560300844C6D /* ViewModel.swift */; };
-		96D68BFF245E958400E77B13 /* GameOfLifeEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68BFE245E958400E77B13 /* GameOfLifeEventHandler.swift */; };
+		96C90C7A246154AB00844C6D /* GameOfLifeAsyncActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68C03245F79C100E77B13 /* GameOfLifeAsyncActionHandler.swift */; };
+		96C90C7D2461560300844C6D /* GameOfLifeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C90C7C2461560300844C6D /* GameOfLifeViewModel.swift */; };
 		96D68C01245EA8CD00E77B13 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68C00245EA8CD00E77B13 /* State.swift */; };
-		96D68C04245F79C100E77B13 /* ActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D68C03245F79C100E77B13 /* ActionHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9661D780245E5CF000550521 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9661D75D245E5CED00550521 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9661D764245E5CED00550521;
-			remoteInfo = Life;
-		};
 		9661D79D245E5E4A00550521 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9661D75D245E5CED00550521 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9661D792245E5E4A00550521;
-			remoteInfo = Cooridnator;
-		};
-		9661D79F245E5E4A00550521 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9661D75D245E5CED00550521 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9661D764245E5CED00550521;
-			remoteInfo = Life;
-		};
-		9661D7A6245E5E4A00550521 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9661D75D245E5CED00550521 /* Project object */;
 			proxyType = 1;
@@ -68,31 +35,7 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		9661D7AD245E5E4A00550521 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9661D7A9245E5E4A00550521 /* Cooridnator.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		965ED5E024609E0100824C73 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
-		965ED5E22460A22B00824C73 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		9661D765245E5CED00550521 /* Life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Life.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9661D768245E5CED00550521 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9661D76E245E5CED00550521 /* GameOfLifeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLifeScene.swift; sourceTree = "<group>"; };
-		9661D770245E5CED00550521 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		9661D773245E5CED00550521 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9661D775245E5CEF00550521 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9661D778245E5CEF00550521 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9661D77A245E5CEF00550521 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9661D77F245E5CF000550521 /* LifeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9661D783245E5CF000550521 /* GameOfLifeEventHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLifeEventHandlerTests.swift; sourceTree = "<group>"; };
 		9661D785245E5CF000550521 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,30 +47,22 @@
 		9661D7A4245E5E4A00550521 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9661D7B4245E60D800550521 /* EventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		9661D7B6245E60D900550521 /* EventCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCoordinator.swift; sourceTree = "<group>"; };
-		96C90C632461517400844C6D /* Life2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Life2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		96C90C632461517400844C6D /* Life.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Life.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96C90C652461517400844C6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96C90C672461517400844C6D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		96C90C692461517400844C6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		96C90C692461517400844C6D /* GameOfLifeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLifeView.swift; sourceTree = "<group>"; };
 		96C90C6B2461517600844C6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96C90C6E2461517600844C6D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		96C90C712461517600844C6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96C90C732461517600844C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		96C90C7C2461560300844C6D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		96C90C7C2461560300844C6D /* GameOfLifeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLifeViewModel.swift; sourceTree = "<group>"; };
 		96D68BFE245E958400E77B13 /* GameOfLifeEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLifeEventHandler.swift; sourceTree = "<group>"; };
 		96D68C00245EA8CD00E77B13 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		96D68C02245F712B00E77B13 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		96D68C03245F79C100E77B13 /* ActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionHandler.swift; sourceTree = "<group>"; };
+		96D68C03245F79C100E77B13 /* GameOfLifeAsyncActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfLifeAsyncActionHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9661D762245E5CED00550521 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9661D7A8245E5E4A00550521 /* Cooridnator.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9661D77C245E5CF000550521 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -164,11 +99,10 @@
 			isa = PBXGroup;
 			children = (
 				96D68C02245F712B00E77B13 /* README.md */,
-				9661D767245E5CED00550521 /* Life */,
+				96C90C642461517400844C6D /* Life */,
 				9661D782245E5CF000550521 /* LifeTests */,
 				9661D794245E5E4A00550521 /* Cooridnator */,
 				9661D7A1245E5E4A00550521 /* CooridnatorTests */,
-				96C90C642461517400844C6D /* Life2 */,
 				9661D766245E5CED00550521 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -176,26 +110,12 @@
 		9661D766245E5CED00550521 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9661D765245E5CED00550521 /* Life.app */,
 				9661D77F245E5CF000550521 /* LifeTests.xctest */,
 				9661D793245E5E4A00550521 /* Cooridnator.framework */,
 				9661D79B245E5E4A00550521 /* CooridnatorTests.xctest */,
-				96C90C632461517400844C6D /* Life2.app */,
+				96C90C632461517400844C6D /* Life.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		9661D767245E5CED00550521 /* Life */ = {
-			isa = PBXGroup;
-			children = (
-				9661D770245E5CED00550521 /* RootViewController.swift */,
-				9661D76E245E5CED00550521 /* GameOfLifeScene.swift */,
-				965ED5E22460A22B00824C73 /* ViewModel.swift */,
-				96C90C7B246154C600844C6D /* Shared */,
-				965ED5E024609E0100824C73 /* CellView.swift */,
-				9663D518245FA17B00E4C674 /* Resources */,
-			);
-			path = Life;
 			sourceTree = "<group>";
 		};
 		9661D782245E5CF000550521 /* LifeTests */ = {
@@ -228,31 +148,29 @@
 			path = CooridnatorTests;
 			sourceTree = "<group>";
 		};
-		9663D518245FA17B00E4C674 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				9661D768245E5CED00550521 /* AppDelegate.swift */,
-				9661D772245E5CED00550521 /* Main.storyboard */,
-				9661D775245E5CEF00550521 /* Assets.xcassets */,
-				9661D777245E5CEF00550521 /* LaunchScreen.storyboard */,
-				9661D77A245E5CEF00550521 /* Info.plist */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		96C90C642461517400844C6D /* Life2 */ = {
+		969DA61A24865C5300A59635 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				96C90C652461517400844C6D /* AppDelegate.swift */,
 				96C90C672461517400844C6D /* SceneDelegate.swift */,
-				96C90C7C2461560300844C6D /* ViewModel.swift */,
-				96C90C692461517400844C6D /* ContentView.swift */,
 				96C90C6B2461517600844C6D /* Assets.xcassets */,
 				96C90C702461517600844C6D /* LaunchScreen.storyboard */,
 				96C90C732461517600844C6D /* Info.plist */,
 				96C90C6D2461517600844C6D /* Preview Content */,
 			);
-			path = Life2;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		96C90C642461517400844C6D /* Life */ = {
+			isa = PBXGroup;
+			children = (
+				969DA61A24865C5300A59635 /* Resources */,
+				96D68BFE245E958400E77B13 /* GameOfLifeEventHandler.swift */,
+				96D68C03245F79C100E77B13 /* GameOfLifeAsyncActionHandler.swift */,
+				96C90C7C2461560300844C6D /* GameOfLifeViewModel.swift */,
+				96C90C692461517400844C6D /* GameOfLifeView.swift */,
+			);
+			path = Life;
 			sourceTree = "<group>";
 		};
 		96C90C6D2461517600844C6D /* Preview Content */ = {
@@ -261,15 +179,6 @@
 				96C90C6E2461517600844C6D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		96C90C7B246154C600844C6D /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				96D68BFE245E958400E77B13 /* GameOfLifeEventHandler.swift */,
-				96D68C03245F79C100E77B13 /* ActionHandler.swift */,
-			);
-			name = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,25 +195,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		9661D764245E5CED00550521 /* Life */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9661D788245E5CF000550521 /* Build configuration list for PBXNativeTarget "Life" */;
-			buildPhases = (
-				9661D761245E5CED00550521 /* Sources */,
-				9661D762245E5CED00550521 /* Frameworks */,
-				9661D763245E5CED00550521 /* Resources */,
-				9661D7AD245E5E4A00550521 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9661D7A7245E5E4A00550521 /* PBXTargetDependency */,
-			);
-			name = Life;
-			productName = Life;
-			productReference = 9661D765245E5CED00550521 /* Life.app */;
-			productType = "com.apple.product-type.application";
-		};
 		9661D77E245E5CF000550521 /* LifeTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9661D78B245E5CF000550521 /* Build configuration list for PBXNativeTarget "LifeTests" */;
@@ -316,7 +206,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				9661D781245E5CF000550521 /* PBXTargetDependency */,
 			);
 			name = LifeTests;
 			productName = LifeTests;
@@ -353,16 +242,15 @@
 			);
 			dependencies = (
 				9661D79E245E5E4A00550521 /* PBXTargetDependency */,
-				9661D7A0245E5E4A00550521 /* PBXTargetDependency */,
 			);
 			name = CooridnatorTests;
 			productName = CooridnatorTests;
 			productReference = 9661D79B245E5E4A00550521 /* CooridnatorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		96C90C622461517400844C6D /* Life2 */ = {
+		96C90C622461517400844C6D /* Life */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96C90C762461517600844C6D /* Build configuration list for PBXNativeTarget "Life2" */;
+			buildConfigurationList = 96C90C762461517600844C6D /* Build configuration list for PBXNativeTarget "Life" */;
 			buildPhases = (
 				96C90C5F2461517400844C6D /* Sources */,
 				96C90C602461517400844C6D /* Frameworks */,
@@ -372,9 +260,9 @@
 			);
 			dependencies = (
 			);
-			name = Life2;
+			name = Life;
 			productName = Life2;
-			productReference = 96C90C632461517400844C6D /* Life2.app */;
+			productReference = 96C90C632461517400844C6D /* Life.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -387,9 +275,6 @@
 				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Isaac Ruiz";
 				TargetAttributes = {
-					9661D764245E5CED00550521 = {
-						CreatedOnToolsVersion = 11.2.1;
-					};
 					9661D77E245E5CF000550521 = {
 						CreatedOnToolsVersion = 11.2.1;
 						TestTargetID = 9661D764245E5CED00550521;
@@ -420,26 +305,15 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9661D764245E5CED00550521 /* Life */,
+				96C90C622461517400844C6D /* Life */,
 				9661D77E245E5CF000550521 /* LifeTests */,
 				9661D792245E5E4A00550521 /* Cooridnator */,
 				9661D79A245E5E4A00550521 /* CooridnatorTests */,
-				96C90C622461517400844C6D /* Life2 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		9661D763245E5CED00550521 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9661D774245E5CED00550521 /* Main.storyboard in Resources */,
-				9661D776245E5CEF00550521 /* Assets.xcassets in Resources */,
-				9661D779245E5CEF00550521 /* LaunchScreen.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9661D77D245E5CF000550521 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -474,20 +348,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9661D761245E5CED00550521 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9661D76F245E5CED00550521 /* GameOfLifeScene.swift in Sources */,
-				96D68C04245F79C100E77B13 /* ActionHandler.swift in Sources */,
-				965ED5E124609E0100824C73 /* CellView.swift in Sources */,
-				9661D771245E5CED00550521 /* RootViewController.swift in Sources */,
-				96D68BFF245E958400E77B13 /* GameOfLifeEventHandler.swift in Sources */,
-				9661D769245E5CED00550521 /* AppDelegate.swift in Sources */,
-				965ED5E32460A22B00824C73 /* ViewModel.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9661D77B245E5CF000550521 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -518,57 +378,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96C90C7A246154AB00844C6D /* ActionHandler.swift in Sources */,
+				96C90C7A246154AB00844C6D /* GameOfLifeAsyncActionHandler.swift in Sources */,
 				96C90C662461517400844C6D /* AppDelegate.swift in Sources */,
 				96C90C79246154A800844C6D /* GameOfLifeEventHandler.swift in Sources */,
 				96C90C682461517400844C6D /* SceneDelegate.swift in Sources */,
-				96C90C7D2461560300844C6D /* ViewModel.swift in Sources */,
-				96C90C6A2461517400844C6D /* ContentView.swift in Sources */,
+				96C90C7D2461560300844C6D /* GameOfLifeViewModel.swift in Sources */,
+				96C90C6A2461517400844C6D /* GameOfLifeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9661D781245E5CF000550521 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9661D764245E5CED00550521 /* Life */;
-			targetProxy = 9661D780245E5CF000550521 /* PBXContainerItemProxy */;
-		};
 		9661D79E245E5E4A00550521 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9661D792245E5E4A00550521 /* Cooridnator */;
 			targetProxy = 9661D79D245E5E4A00550521 /* PBXContainerItemProxy */;
 		};
-		9661D7A0245E5E4A00550521 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9661D764245E5CED00550521 /* Life */;
-			targetProxy = 9661D79F245E5E4A00550521 /* PBXContainerItemProxy */;
-		};
-		9661D7A7245E5E4A00550521 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9661D792245E5E4A00550521 /* Cooridnator */;
-			targetProxy = 9661D7A6245E5E4A00550521 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9661D772245E5CED00550521 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9661D773245E5CED00550521 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		9661D777245E5CEF00550521 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9661D778245E5CEF00550521 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		96C90C702461517600844C6D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -694,48 +523,9 @@
 			};
 			name = Release;
 		};
-		9661D789245E5CF000550521 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ASK275LEGN;
-				INFOPLIST_FILE = Life/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.isaacruiz.Life;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		9661D78A245E5CF000550521 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ASK275LEGN;
-				INFOPLIST_FILE = Life/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.isaacruiz.Life;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		9661D78C245E5CF000550521 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ASK275LEGN;
@@ -757,7 +547,6 @@
 		9661D78D245E5CF000550521 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ASK275LEGN;
@@ -836,7 +625,6 @@
 		9661D7AF245E5E4A00550521 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ASK275LEGN;
 				INFOPLIST_FILE = CooridnatorTests/Info.plist;
@@ -856,7 +644,6 @@
 		9661D7B0245E5E4A00550521 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ASK275LEGN;
 				INFOPLIST_FILE = CooridnatorTests/Info.plist;
@@ -878,15 +665,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Life2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Life/Preview Content\"";
 				DEVELOPMENT_TEAM = ASK275LEGN;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Life2/Info.plist;
+				INFOPLIST_FILE = Life/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.isaacruiz.Life2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.isaacruiz.Life;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -898,15 +685,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Life2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Life/Preview Content\"";
 				DEVELOPMENT_TEAM = ASK275LEGN;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Life2/Info.plist;
+				INFOPLIST_FILE = Life/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.isaacruiz.Life2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.isaacruiz.Life;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -921,15 +708,6 @@
 			buildConfigurations = (
 				9661D786245E5CF000550521 /* Debug */,
 				9661D787245E5CF000550521 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9661D788245E5CF000550521 /* Build configuration list for PBXNativeTarget "Life" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9661D789245E5CF000550521 /* Debug */,
-				9661D78A245E5CF000550521 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -961,7 +739,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		96C90C762461517600844C6D /* Build configuration list for PBXNativeTarget "Life2" */ = {
+		96C90C762461517600844C6D /* Build configuration list for PBXNativeTarget "Life" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96C90C742461517600844C6D /* Debug */,

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9661D764245E5CED00550521"
+               BlueprintIdentifier = "96C90C622461517400844C6D"
                BuildableName = "Life.app"
                BlueprintName = "Life"
                ReferencedContainer = "container:Life.xcodeproj">
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9661D79A245E5E4A00550521"
-               BuildableName = "CooridnatorTests.xctest"
-               BlueprintName = "CooridnatorTests"
-               ReferencedContainer = "container:Life.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
@@ -64,7 +54,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9661D764245E5CED00550521"
+            BlueprintIdentifier = "96C90C622461517400844C6D"
             BuildableName = "Life.app"
             BlueprintName = "Life"
             ReferencedContainer = "container:Life.xcodeproj">
@@ -81,7 +71,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9661D764245E5CED00550521"
+            BlueprintIdentifier = "96C90C622461517400844C6D"
             BuildableName = "Life.app"
             BlueprintName = "Life"
             ReferencedContainer = "container:Life.xcodeproj">

@@ -86,13 +86,12 @@ struct GameOfLifeEventHandler: EventHandler {
             }
             
         case .randomize:
+            state.generation = 0
             state.nodes = (0..<(state.gridSize.width * state.gridSize.height)).map { _ in Cell.random() }
             
         case let .tappedCell(id):
-            print(id)
             guard let index = state.nodes.firstIndex(where: { $0.id == id }) else {
                 break }
-            print(index)
             let cells = state.neighbors(for: index) + [index]
             cells
                 .filter { $0 >= 0 && $0 < state.nodes.count }
